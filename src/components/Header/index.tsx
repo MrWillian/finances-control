@@ -4,10 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container } from './styles';
 
-const Header: React.FC = () => {
+interface Props {
+  navigation ?: any;
+}
+
+const Header: React.FC<Props> = ({ navigation }) => {
+  
+  const openDrawer = () => {
+    navigation.openDrawer();
+  }
+
   return (
     <Container>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={openDrawer}>
         <Icon name="sort" size={25} color="#FFD700" />
       </TouchableOpacity>
       <TouchableOpacity>
