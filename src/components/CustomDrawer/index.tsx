@@ -24,9 +24,9 @@ const CustomDrawer: React.FC = () => {
   return (
     <Container>
       <ItemsContainer>
-        {items.map((item) => {
+        {items.map((item, index) => {
           return (
-            <ItemButton>
+            <ItemButton key={index}>
               <ItemLabel>{item}</ItemLabel>
             </ItemButton>
           );
