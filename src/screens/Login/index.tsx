@@ -19,7 +19,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
       <SimpleForm>
         <Input name="Email" icon="mail" />
         <Input name="Senha" icon="lock" />
-        <Button name="Entrar" />
+        <Button name="Entrar" route="MainStack" navigation={navigation} />
       </SimpleForm>
       <BottomInfo>
         <BottomInfoText>Não tem uma conta?</BottomInfoText>
