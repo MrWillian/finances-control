@@ -21,7 +21,7 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
         <Input name="Email" icon="mail" />
         <Input name="Telefone" icon="phone" />
         <Input name="Senha" icon="lock" />
-        <Button name="Cadastrar" route="Login" navigation={navigation} />
+        <Button name="Cadastrar" route="MainStack" navigation={navigation} />
       </SimpleForm>
       <BottomInfo>
         <BottomInfoText>
