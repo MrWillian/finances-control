@@ -1,8 +1,8 @@
 import React from 'react';
 
 import SimpleForm from '../../components/SimpleForm';
-import Title from '../../components/Title';
 import Input from '../../components/Input';
+import Title from '../../components/Title';
 import Button from '../../components/Button';
 import BottomInfo from '../../components/BottomInfo';
 import BottomInfoText from '../../components/BottomInfoText';
@@ -12,23 +12,27 @@ import { iNavigationProps } from '../../utils/iNavigationProps';
 
 import { Container } from './styles';
 
-const Login: React.FC<iNavigationProps> = ({ navigation }) => {
+const Register: React.FC<iNavigationProps> = ({ navigation }) => {
   return (
     <Container>
-      <Title>Faça login com seu email e senha...</Title>
+      <Title>Crie sua conta...</Title>
       <SimpleForm>
+        <Input name="Nome" icon="person" />
         <Input name="Email" icon="mail" />
+        <Input name="Telefone" icon="phone" />
         <Input name="Senha" icon="lock" />
-        <Button name="Entrar" />
+        <Button name="Cadastrar" />
       </SimpleForm>
       <BottomInfo>
-        <BottomInfoText>Não tem uma conta?</BottomInfoText>
-        <BottomInfoLink navigation={navigation} route="Register">
-          Criar!
+        <BottomInfoText>
+          Já tem uma conta?
+        </BottomInfoText>
+        <BottomInfoLink navigation={navigation} route="Login">
+          Entrar!
         </BottomInfoLink>
       </BottomInfo>
     </Container>
   );
 }
 
-export default Login;
+export default Register;

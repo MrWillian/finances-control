@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  flex: 1;
-  background: #2D142C;
-  justify-content: center;
-  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 80px;
+  padding: 10px;
 `;
