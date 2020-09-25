@@ -4,18 +4,12 @@ import { Container, Label } from './styles';
 
 interface Props {
   name ?: string;
-  route: string;
-  navigation: any;
+  onPress(): any;
 }
 
-const Button: React.FC<Props> = ({ name, route, navigation }) => {
-  
-  const navigateToRoute = () => {
-    navigation.navigate(route);
-  }
-
+const Button: React.FC<Props> = ({ name, onPress }) => {
   return (
-    <Container onPress={navigateToRoute}>
+    <Container onPress={onPress}>
       <Label>{name}</Label>
     </Container>
   );
