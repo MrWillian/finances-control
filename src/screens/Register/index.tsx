@@ -10,6 +10,8 @@ import BottomInfoText from '../../components/BottomInfoText';
 import BottomInfoLink from '../../components/BottomInfoLink';
 
 import { iNavigationProps } from '../../utils/iNavigationProps';
+import AuthController from '../../controllers/AuthController';
+import StorageController from '../../controllers/StorageController';
 
 import { Container } from './styles';
 
@@ -18,6 +20,22 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
 	const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
+
+  let authController = new AuthController();
+  let storageController = new StorageController();
+  
+  async function handleRegister() {
+    await (authController.register(name, email, phoneNumber, password)).then(user => {
+      if (user.data == undefined) {
+        Alert.alert('Erro', 'Ocorreu um erro ao tentar se registrar, tente novamente!', [
+          { style: "cancel" }
+        ]);
+        return;
+      }
+      storageController.setItem('@finances/user', user.data);
+      navigation.navigate('MainStack');
+    });
+  }
 
   return (
     <Container>
@@ -38,7 +56,7 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
           onChangeText={password => setPassword(password)}
           secureTextEntry={true} />
         
-        {/* <Button name="Cadastrar" /> */}
+        <Button name="Cadastrar" onPress={handleRegister} />
 
       </SimpleForm>
       <BottomInfo>
