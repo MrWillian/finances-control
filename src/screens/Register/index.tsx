@@ -43,8 +43,18 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
       <SimpleForm>
         <Input name="Nome" value={name} icon="person" onChangeText={name => setName(name)} />
         <Input name="Email" value={email} icon="mail" onChangeText={email => setEmail(email)} />
-        <Input name="Telefone" value={phoneNumber} icon="phone" onChangeText={phoneNumber => setPhoneNumber(phoneNumber)} />
-        <Input name="Senha" value={password} icon="lock" onChangeText={password => setPassword(password)} />
+        <Input 
+          name="Telefone" 
+          value={phoneNumber} 
+          icon="call" 
+          onChangeText={phoneNumber => setPhoneNumber(phoneNumber)}
+          isPhoneNumber={true} />
+        <Input 
+          name="Senha" 
+          value={password} 
+          icon="lock-closed" 
+          onChangeText={password => setPassword(password)}
+          secureTextEntry={true} />
         
         <Button name="Cadastrar" onPress={handleRegister} />
 
