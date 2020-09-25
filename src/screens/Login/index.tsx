@@ -41,7 +41,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
       <Title>Faça login com seu email e senha...</Title>
       <SimpleForm>
         <Input name="Email" value={email} icon="mail" onChangeText={email => setEmail(email)} />
-        <Input name="Senha" value={password} icon="lock" onChangeText={password => setPassword(password)} />
+        <Input name="Senha" value={password}  icon="lock-closed" secureTextEntry={true} onChangeText={password => setPassword(password)} />
         <Button name="Entrar" onPress={handleLogin} />
       </SimpleForm>
       <BottomInfo>

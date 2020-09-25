@@ -8,7 +8,7 @@ const Splash: React.FC<iNavigationProps> = ({ navigation }) => {
   useEffect(() => {
     setTimeout(function(){
       navigation.navigate('Login');
-    }, 3000);
+    }, 2000);
   }, []);
 
   return (

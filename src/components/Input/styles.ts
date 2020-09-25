@@ -15,9 +15,10 @@ export const Container = styled.View`
 `;
 
 export const TextInput = styled.TextInput`
+  width: 70%;
   font-family: 'Glegoo';
-  font-weight: 700;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 14px;
 
   color: #2D142C;
 
