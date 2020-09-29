@@ -1,76 +1,75 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import AccountCard from '../AccountCard';
+import TransactionCard, { TransactionType } from '../TransactionCard';
 
 import { 
-  Container, AccountsContainer, Title, AccountCard, AccountTitle, PlusButtonContainer, 
-  BillsContainer, BillsScroll, BillsTitle, BillsCard, BillsCardTitle, BillsCardValuePositive, BillsCardValueNegative
+  Container, AccountsContainer, Title, PlusButtonContainer, 
+  BillsContainer, BillsScroll, BillsTitle
 } from './styles';
 
 const Accounts: React.FC = () => {
+  const navigation = useNavigation();
+
+  const accounts = [
+    {
+      title: 'Conta Banco 1',
+      value: 'R$ 1.300,00'
+    }, {
+      title: 'Conta Banco 2',
+      value: 'R$ 4.800,00'
+    },
+  ];
+
+  const transactions = [
+    {
+      title: 'Fat. Cartão',
+      value: 'R$ -10,00',
+      type: TransactionType.BILLTOPAY,
+    }, {
+      title: 'Salário',
+      value: 'R$ 1.049,00',
+      type: TransactionType.BILLTORECEIVE,
+    }, {
+      title: 'Vendas semanais',
+      value: 'R$ 550,00',
+      type: TransactionType.BILLTORECEIVE,
+    },
+  ];
+
   return (
     <Container>
       <AccountsContainer>
         <Title>Contas</Title>
-        <AccountCard>
-          <AccountTitle>Conta Banco 1</AccountTitle>
-          <Text>R$ 1.300,00</Text>
-        </AccountCard>
 
-        <AccountCard>
-          <AccountTitle>Conta Banco 2</AccountTitle>
-          <Text>R$ 4.800,00</Text>
-        </AccountCard>
+        {accounts.map((account, index) => (
+          <AccountCard key={index} title={account.title} value={account.value} />
+        ))}
+        
 
-        <PlusButtonContainer>
+        <PlusButtonContainer onPress={() => navigation.navigate('NewAccount')}>
           <Icon name="add" size={20} color="#FFF" />
         </PlusButtonContainer>
       </AccountsContainer>
 
       <BillsContainer>
-        <BillsTitle>Contas a pagar</BillsTitle>
+        <BillsTitle>Movimentações</BillsTitle>
         
         <BillsScroll horizontal={true}>
 
-          <BillsCard>
-            <BillsCardTitle>Internet</BillsCardTitle>
-            <BillsCardValueNegative>R$ 100,00</BillsCardValueNegative>
-          </BillsCard>
-
-          <BillsCard>
-            <BillsCardTitle>Luz</BillsCardTitle>
-            <BillsCardValueNegative>R$ 90,00</BillsCardValueNegative>
-          </BillsCard>
-
-          <BillsCard>
-            <BillsCardTitle>Fatura Cartão</BillsCardTitle>
-            <BillsCardValueNegative>R$ 237,00</BillsCardValueNegative>
-          </BillsCard>
-
-          <BillsCard>
-            <BillsCardTitle>Assinatura TV</BillsCardTitle>
-            <BillsCardValueNegative>R$ 60,00</BillsCardValueNegative>
-          </BillsCard>
+          {transactions.map((transaction, index) => (
+            <TransactionCard 
+              key={index} 
+              title={transaction.title} 
+              value={transaction.value}
+              type={transaction.type} />
+          ))}
+          
         </BillsScroll>
 
       </BillsContainer>
 
-      <BillsContainer>
-        <BillsTitle>Contas a receber</BillsTitle>
-
-        <BillsScroll horizontal={true}>
-          <BillsCard>
-            <BillsCardTitle>Salário</BillsCardTitle>
-            <BillsCardValuePositive>R$ 3100,00</BillsCardValuePositive>
-          </BillsCard>
-
-          <BillsCard>
-            <BillsCardTitle>Venda - Bicicleta</BillsCardTitle>
-            <BillsCardValuePositive>R$ 490,00</BillsCardValuePositive>
-          </BillsCard>
-        </BillsScroll>
-        
-      </BillsContainer>
     </Container>
   );
 }
