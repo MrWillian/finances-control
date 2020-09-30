@@ -5,15 +5,18 @@ import { TextInputMask } from 'react-native-masked-text';
 import { Container, TextInput } from './styles';
 
 interface Props {
-  name?: string;
-  icon: string;
-  value?: string;
+  name: string;
+  icon?: string;
+  value: string;
   onChangeText(operation: any): any;
   secureTextEntry?: boolean;
   isPhoneNumber?: boolean;
+  focus?: boolean;
 }
 
-const Input: React.FC<Props> = ({ name, icon, value, onChangeText, secureTextEntry, isPhoneNumber }) => {
+const Input: React.FC<Props> = ({ 
+  name, icon, value, onChangeText, secureTextEntry, isPhoneNumber, focus
+}) => {
   const [showPassword, setShowPassword] = useState(secureTextEntry);
 
   const changeShowPasswordIcon = () => {
@@ -22,10 +25,16 @@ const Input: React.FC<Props> = ({ name, icon, value, onChangeText, secureTextEnt
 
   return (
     <Container>
-      <Icon name={icon} size={30} color="#2D142C" />
+      {icon ? 
+        <Icon name={icon} size={30} color="#2D142C" />
+        : <></>
+      }
       {!isPhoneNumber
         ? (<TextInput 
             placeholder={name} 
+            autoFocus={focus}
+            value={value}
+            onChangeText={onChangeText}
             secureTextEntry={showPassword} />)
         : 
         (<TextInputMask

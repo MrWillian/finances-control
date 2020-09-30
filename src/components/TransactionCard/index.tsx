@@ -30,11 +30,12 @@ const TransactionCard: React.FC<Props> = ({
       style={{
         flex: 1, 
         borderRadius: 5, 
-        padding: 15, 
-        paddingBottom: 15, 
-        paddingLeft: 15, 
-        paddingRight: 15, 
-        marginRight: 10
+        justifyContent: 'space-between',
+        padding: 15,
+        marginLeft: 0,
+        marginRight: 10,
+        width: 110,
+        height: 150,
       }}>
       
       <Container>

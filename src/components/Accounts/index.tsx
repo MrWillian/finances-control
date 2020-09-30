@@ -1,7 +1,11 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import BottomSheetBehavior from 'reanimated-bottom-sheet';
+import BottomSheet from 'reanimated-bottom-sheet';
+
 import AccountCard from '../AccountCard';
+import NewAccountSheet from '../NewAccountSheet';
+
 import TransactionCard, { TransactionType } from '../TransactionCard';
 
 import { 
@@ -10,7 +14,7 @@ import {
 } from './styles';
 
 const Accounts: React.FC = () => {
-  const navigation = useNavigation();
+  const sheetRef = React.useRef(null);
 
   const accounts = [
     {
@@ -38,17 +42,22 @@ const Accounts: React.FC = () => {
     },
   ];
 
+  const openBottomSheet = () => {
+    let openBottom: BottomSheetBehavior | null = sheetRef.current;
+    openBottom!.snapTo(0);
+  }
+
   return (
     <Container>
+
       <AccountsContainer>
         <Title>Contas</Title>
 
         {accounts.map((account, index) => (
           <AccountCard key={index} title={account.title} value={account.value} />
         ))}
-        
 
-        <PlusButtonContainer onPress={() => navigation.navigate('NewAccount')}>
+        <PlusButtonContainer onPress={openBottomSheet}>
           <Icon name="add" size={20} color="#FFF" />
         </PlusButtonContainer>
       </AccountsContainer>
@@ -69,6 +78,16 @@ const Accounts: React.FC = () => {
         </BillsScroll>
 
       </BillsContainer>
+
+      <BottomSheet
+        ref={sheetRef}
+        snapPoints={['60%', 0, 0]}
+        initialSnap={2}
+        borderRadius={10}
+        renderContent={NewAccountSheet}
+        // enabledContentGestureInteraction={false}
+        enabledContentTapInteraction={false}
+        />
 
     </Container>
   );
