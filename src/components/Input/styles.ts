@@ -14,7 +14,7 @@ export const Container = styled.View`
   elevation: 20;
 `;
 
-export const TextInput = styled.TextInput`
+export const Input = styled.TextInput`
   width: 70%;
   font-family: 'Glegoo';
   font-weight: 600;
