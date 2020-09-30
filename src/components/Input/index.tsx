@@ -1,62 +1,43 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { TextInputMask } from 'react-native-masked-text';
 
-import { Container, TextInput } from './styles';
+import { TextInput, PasswordInput, MoneyInput, PhoneInput } from '../CustomInputs';
+import { FieldType } from '../CustomInputs/FieldType';
+import { iCustomInputProps } from '../CustomInputs/iCustomInputProps';
+import { Container } from './styles';
 
-interface Props {
-  name: string;
-  icon?: string;
-  value: string;
-  onChangeText(operation: any): any;
-  secureTextEntry?: boolean;
-  isPhoneNumber?: boolean;
-  focus?: boolean;
-}
-
-const Input: React.FC<Props> = ({ 
-  name, icon, value, onChangeText, secureTextEntry, isPhoneNumber, focus
+const Input: React.FC<iCustomInputProps> = ({ 
+  name, icon, value, onChangeText, focus, type
 }) => {
+  const secureTextEntry = type === FieldType.PASSWORD;
   const [showPassword, setShowPassword] = useState(secureTextEntry);
 
-  const changeShowPasswordIcon = () => {
-    setShowPassword(!showPassword);
+  const changeShowPasswordIcon = () => { setShowPassword(!showPassword); }
+
+  const getInputForType = () => {
+    switch(type) {
+      case FieldType.TEXT:
+        return <TextInput name={name} value={value} onChangeText={onChangeText} focus={focus} />;
+      case FieldType.PASSWORD:
+        return <PasswordInput name={name} value={value} onChangeText={onChangeText} focus={focus}
+                showPassword={showPassword} />
+      case FieldType.PHONENUMBER:
+        return <PhoneInput name={name} value={value} onChangeText={onChangeText} focus={focus} />;
+      case FieldType.MONEY:
+        return <MoneyInput name={name} value={value} onChangeText={onChangeText} focus={focus} />;
+      default: 
+        return;
+    }
   }
 
   return (
     <Container>
-      {icon ? 
-        <Icon name={icon} size={30} color="#2D142C" />
-        : <></>
-      }
-      {!isPhoneNumber
-        ? (<TextInput 
-            placeholder={name} 
-            autoFocus={focus}
-            value={value}
-            onChangeText={onChangeText}
-            secureTextEntry={showPassword} />)
-        : 
-        (<TextInputMask
-          style={{marginLeft: 10}}
-          placeholder={name} 
-          type={'cel-phone'}
-          options={{
-            maskType: 'BRL',
-            withDDD: true,
-            dddMask: '(99) '
-          }}
-          value={value}
-          onChangeText={onChangeText} />)
-      }
+      {icon ? <Icon name={icon} size={30} color="#2D142C" /> : <></>}
 
-      {!secureTextEntry ? 
-        <></>
-        : (<Icon 
-            name={showPassword ? 'eye' : 'eye-off'} 
-            size={30} 
-            color="#2D142C"
-            onPress={changeShowPasswordIcon} />)
+      {getInputForType()}
+
+      {!secureTextEntry ? <></>
+        : <Icon name={showPassword ? 'eye' : 'eye-off'}  size={30}  color="#2D142C" onPress={changeShowPasswordIcon} />
       }
     </Container>
   );
