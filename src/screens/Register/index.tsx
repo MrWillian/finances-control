@@ -14,6 +14,7 @@ import AuthController from '../../controllers/AuthController';
 import StorageController from '../../controllers/StorageController';
 
 import { Container } from './styles';
+import { FieldType } from '../../components/CustomInputs/FieldType';
 
 const Register: React.FC<iNavigationProps> = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -42,29 +43,35 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
     <Container>
       <Title>Crie sua conta...</Title>
       <SimpleForm>
+        
         <Input 
           name="Nome" 
           value={name} 
           icon="person" 
           onChangeText={name => setName(name)}
+          type={FieldType.TEXT}
           focus={true} />
+
         <Input 
           name="Email" 
           value={email} 
           icon="mail" 
-          onChangeText={email => setEmail(email)} />
+          onChangeText={email => setEmail(email)}
+          type={FieldType.TEXT} />
+
         <Input 
           name="Telefone" 
           value={phoneNumber} 
           icon="call" 
           onChangeText={phoneNumber => setPhoneNumber(phoneNumber)}
-          isPhoneNumber={true} />
+          type={FieldType.PHONENUMBER} />
+
         <Input 
           name="Senha" 
           value={password} 
           icon="lock-closed" 
           onChangeText={password => setPassword(password)}
-          secureTextEntry={true} />
+          type={FieldType.PASSWORD} />
         
         <Button name="Cadastrar" onPress={handleRegister} />
 
