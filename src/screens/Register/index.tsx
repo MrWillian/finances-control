@@ -26,6 +26,7 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
   
   async function handleRegister() {
     await (authController.register(name, email, phoneNumber, password)).then(user => {
+      console.log(phoneNumber.replace('(', '').replace(')', '').replace(' ', '').replace('-', ''));
       if (user.data == undefined) {
         Alert.alert('Erro', 'Ocorreu um erro ao tentar se registrar, tente novamente!', [
           { style: "cancel" }
@@ -41,8 +42,17 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
     <Container>
       <Title>Crie sua conta...</Title>
       <SimpleForm>
-        <Input name="Nome" value={name} icon="person" onChangeText={name => setName(name)} />
-        <Input name="Email" value={email} icon="mail" onChangeText={email => setEmail(email)} />
+        <Input 
+          name="Nome" 
+          value={name} 
+          icon="person" 
+          onChangeText={name => setName(name)}
+          focus={true} />
+        <Input 
+          name="Email" 
+          value={email} 
+          icon="mail" 
+          onChangeText={email => setEmail(email)} />
         <Input 
           name="Telefone" 
           value={phoneNumber} 
