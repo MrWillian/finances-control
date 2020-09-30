@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '../Button';
 import Input from '../Input';
+import { FieldType } from '../CustomInputs/FieldType';
 
 import { Container } from './styles';
 
@@ -15,17 +16,20 @@ const SheetForm: React.FC = () => {
         name="Nome"
         value={name}
         onChangeText={name => setName(name)}
-        focus={true} />
+        focus={true}
+        type={FieldType.TEXT} />
 
       <Input 
         name="Descrição"
         value={description}
-        onChangeText={description => setDescription(description)} />
+        onChangeText={description => setDescription(description)}
+        type={FieldType.TEXT} />
       
       <Input 
         name="Valor R$"
         value={value}
-        onChangeText={value => setValue(value)} />
+        onChangeText={value => setValue(value)}
+        type={FieldType.MONEY} />
 
       <Button 
         name="Registrar" 
