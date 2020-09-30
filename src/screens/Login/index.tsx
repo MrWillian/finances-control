@@ -15,6 +15,7 @@ import AuthController from '../../controllers/AuthController';
 import StorageController from '../../controllers/StorageController';
 
 import { Container } from './styles';
+import { FieldType } from '../../components/CustomInputs/FieldType';
 
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
@@ -45,13 +46,16 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
           value={email} 
           icon="mail" 
           onChangeText={email => setEmail(email)}
-          focus={true} />
+          focus={true}
+          type={FieldType.TEXT} />
+          
         <Input 
           name="Senha" 
           value={password}  
           icon="lock-closed" 
-          secureTextEntry={true} 
-          onChangeText={password => setPassword(password)} />
+          onChangeText={password => setPassword(password)}
+          type={FieldType.PASSWORD} />
+
         <Button name="Entrar" onPress={handleLogin} />
       </SimpleForm>
       <BottomInfo>
