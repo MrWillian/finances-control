@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { TextInput, PasswordInput, MoneyInput, PhoneInput } from '../CustomInputs';
-import { FieldType } from '../CustomInputs/FieldType';
-import { iCustomInputProps } from '../CustomInputs/iCustomInputProps';
+import { iCustomInputProps, FieldType } from '../../utils';
+
 import { Container } from './styles';
 
 const Input: React.FC<iCustomInputProps> = ({ 

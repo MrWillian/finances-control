@@ -1,6 +1,6 @@
 import React from 'react';
 import { TextInputMask } from 'react-native-masked-text';
-import { iCustomInputProps } from '../iCustomInputProps';
+import { iCustomInputProps } from '../../../utils';
 
 const MoneyInput: React.FC<iCustomInputProps> = ({ 
   name, value, onChangeText, focus

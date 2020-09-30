@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Button from '../Button';
+import { Button } from '../FormBasicComponents/';
 import Input from '../Input';
-import { FieldType } from '../CustomInputs/FieldType';
+import { FieldType } from '../../utils';
 
 import { Container } from './styles';
 
