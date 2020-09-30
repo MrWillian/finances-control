@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 
-import SimpleForm from '../../components/SimpleForm';
-import Title from '../../components/Title';
 import Input from '../../components/Input';
-import Button from '../../components/Button';
-import BottomInfo from '../../components/BottomInfo';
-import BottomInfoText from '../../components/BottomInfoText';
-import BottomInfoLink from '../../components/BottomInfoLink';
+import { SimpleForm, Title, Button } from '../../components/FormBasicComponents';
+import { BottomInfo, BottomInfoText, BottomInfoLink } from '../../components/BottomInfoComponents';
 
-import { iNavigationProps } from '../../utils/iNavigationProps';
-
-import AuthController from '../../controllers/AuthController';
-import StorageController from '../../controllers/StorageController';
+import { iNavigationProps, FieldType } from '../../utils';
+import { AuthController, StorageController } from '../../controllers';
 
 import { Container } from './styles';
-import { FieldType } from '../../components/CustomInputs/FieldType';
 
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
@@ -45,7 +38,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
           name="Email" 
           value={email} 
           icon="mail" 
-          onChangeText={email => setEmail(email)}
+          onChangeText={(email: any) => setEmail(email)}
           focus={true}
           type={FieldType.TEXT} />
           
@@ -53,7 +46,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
           name="Senha" 
           value={password}  
           icon="lock-closed" 
-          onChangeText={password => setPassword(password)}
+          onChangeText={(password: any) => setPassword(password)}
           type={FieldType.PASSWORD} />
 
         <Button name="Entrar" onPress={handleLogin} />
