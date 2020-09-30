@@ -1,6 +1,6 @@
 import React from 'react';
 import { Input } from '../../Input/styles';
-import { iCustomInputProps } from '../iCustomInputProps';
+import { iCustomInputProps } from '../../../utils';
 
 const TextInput: React.FC<iCustomInputProps> = ({ 
   name, value, onChangeText, focus
