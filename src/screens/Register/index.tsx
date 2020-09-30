@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { Alert } from 'react-native';
 
-import SimpleForm from '../../components/SimpleForm';
 import Input from '../../components/Input';
-import Title from '../../components/Title';
-import Button from '../../components/Button';
-import BottomInfo from '../../components/BottomInfo';
-import BottomInfoText from '../../components/BottomInfoText';
-import BottomInfoLink from '../../components/BottomInfoLink';
+import { SimpleForm, Title, Button} from '../../components/FormBasicComponents';
+import { BottomInfo, BottomInfoText, BottomInfoLink } from '../../components/BottomInfoComponents';
 
-import { iNavigationProps } from '../../utils/iNavigationProps';
-import AuthController from '../../controllers/AuthController';
-import StorageController from '../../controllers/StorageController';
+import { iNavigationProps, FieldType } from '../../utils';
+
+import { AuthController, StorageController } from '../../controllers';
 
 import { Container } from './styles';
-import { FieldType } from '../../components/CustomInputs/FieldType';
 
 const Register: React.FC<iNavigationProps> = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -43,7 +38,7 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
     <Container>
       <Title>Crie sua conta...</Title>
       <SimpleForm>
-        
+
         <Input 
           name="Nome" 
           value={name} 
