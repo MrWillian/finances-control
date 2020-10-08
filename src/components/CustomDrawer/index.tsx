@@ -1,10 +1,16 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
+
+import { StorageController } from '../../controllers';
 
 import { 
   Container, ItemsContainer, ItemButton, ItemLabel, Bottom, LogoutButton, LogoutButtonLabel
 } from './styles';
 
 const CustomDrawer: React.FC = () => {
+  const navigation = useNavigation();
+  let storageController = new StorageController();
+
   const items = [
     "Meus Objetivos", 
     "Metas de despesas",
@@ -18,7 +24,8 @@ const CustomDrawer: React.FC = () => {
   // }
 
   const logout = () => {
-    console.log("Logout...");
+    storageController.removeItem('@finances/user');
+    navigation.navigate('Login');
   }
 
   return (

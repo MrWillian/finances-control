@@ -5,7 +5,7 @@ import Input from '../../components/Input';
 import { SimpleForm, Title, Button } from '../../components/FormBasicComponents';
 import { BottomInfo, BottomInfoText, BottomInfoLink } from '../../components/BottomInfoComponents';
 
-import { iNavigationProps, FieldType } from '../../utils';
+import { iNavigationProps, FieldType, CapitalizeType } from '../../utils';
 import { AuthController, StorageController } from '../../controllers';
 
 import { Container } from './styles';
@@ -17,7 +17,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
   let authController = new AuthController();
   let storageController = new StorageController();
 
-  async function handleLogin() { 
+  async function handleLogin() {
     await (authController.login(email, password)).then(user => {
       if (user.data == undefined) {
         Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login, tente novamente!', [
@@ -40,7 +40,12 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
           icon="mail" 
           onChangeText={(email: any) => setEmail(email)}
           focus={true}
-          type={FieldType.TEXT} />
+          type={FieldType.TEXT}
+          textContentType='emailAddress'
+          keyboardType='email-address'
+          autoCapitalize={CapitalizeType.NONE}
+          autoCorrect={false}
+          autoCompleteType='email' />
           
         <Input 
           name="Senha" 
@@ -51,6 +56,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 
         <Button name="Entrar" onPress={handleLogin} />
       </SimpleForm>
+
       <BottomInfo>
         <BottomInfoText>Não tem uma conta?</BottomInfoText>
         <BottomInfoLink navigation={navigation} route="Register">

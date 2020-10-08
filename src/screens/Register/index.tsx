@@ -5,7 +5,7 @@ import Input from '../../components/Input';
 import { SimpleForm, Title, Button} from '../../components/FormBasicComponents';
 import { BottomInfo, BottomInfoText, BottomInfoLink } from '../../components/BottomInfoComponents';
 
-import { iNavigationProps, FieldType } from '../../utils';
+import { iNavigationProps, FieldType, CapitalizeType } from '../../utils';
 
 import { AuthController, StorageController } from '../../controllers';
 
@@ -52,7 +52,12 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
           value={email} 
           icon="mail" 
           onChangeText={email => setEmail(email)}
-          type={FieldType.TEXT} />
+          type={FieldType.TEXT}
+          textContentType='emailAddress'
+          keyboardType='email-address'
+          autoCapitalize={CapitalizeType.NONE}
+          autoCorrect={false}
+          autoCompleteType='email' />
 
         <Input 
           name="Telefone" 

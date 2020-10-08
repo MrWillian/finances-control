@@ -1,4 +1,4 @@
-import storage from '../services/storage';
+import storage from '../../services/storage';
 
 export default class StorageController {
   async setItem(key: string, value: any) {
@@ -15,6 +15,14 @@ export default class StorageController {
     try {
       const jsonValue = await storage.load({ key });
       return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch(error) {
+      return error;
+    }
+  };
+
+  async removeItem(key: string) {
+    try {
+      return await storage.remove({ key });
     } catch(error) {
       return error;
     }
