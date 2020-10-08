@@ -1,4 +1,5 @@
 import { FieldType } from "./FieldType";
+import { CapitalizeType } from "./CapitalizeType";
 
 export interface iCustomInputProps {
   name: string;
@@ -8,7 +9,7 @@ export interface iCustomInputProps {
   showPassword?: boolean;
   type?: FieldType;
   focus?: boolean;
-  autoCapitalize?: string;
+  autoCapitalize?: CapitalizeType;
   includeRawValueInChangeText?: boolean;
   textContentType?: string;
   keyboardType?: string;
