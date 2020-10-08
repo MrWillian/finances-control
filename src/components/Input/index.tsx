@@ -7,7 +7,7 @@ import { iCustomInputProps, FieldType } from '../../utils';
 import { Container } from './styles';
 
 const Input: React.FC<iCustomInputProps> = ({ 
-  name, icon, value, onChangeText, focus, type
+  name, icon, value, onChangeText, focus, type, includeRawValueInChangeText
 }) => {
   const secureTextEntry = type === FieldType.PASSWORD;
   const [showPassword, setShowPassword] = useState(secureTextEntry);
@@ -24,7 +24,8 @@ const Input: React.FC<iCustomInputProps> = ({
       case FieldType.PHONENUMBER:
         return <PhoneInput name={name} value={value} onChangeText={onChangeText} focus={focus} />;
       case FieldType.MONEY:
-        return <MoneyInput name={name} value={value} onChangeText={onChangeText} focus={focus} />;
+        return <MoneyInput name={name} value={value} onChangeText={onChangeText} focus={focus} 
+            includeRawValueInChangeText={includeRawValueInChangeText} />;
       default: 
         return;
     }
