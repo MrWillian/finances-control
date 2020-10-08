@@ -4,8 +4,9 @@ export interface iCustomInputProps {
   name: string;
   value: string;
   icon?: string;
-  onChangeText(operation: any): any;
+  onChangeText(value: any, rawValue: any): any;
   showPassword?: boolean;
   type?: FieldType;
   focus?: boolean;
+  includeRawValueInChangeText?: boolean;
 }
