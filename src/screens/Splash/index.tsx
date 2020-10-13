@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Loading from '../../components/Loading';
-import { iNavigationProps } from '../../utils/iNavigationProps';
+import { iNavigationProps } from '../../utils';
 
 import { StorageController } from '../../controllers';
 
