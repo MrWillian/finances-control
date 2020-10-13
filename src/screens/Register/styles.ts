@@ -1,9 +1,12 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1
+  }
+})`
+  padding: 10px;
   background: #2D142C;
 `;
