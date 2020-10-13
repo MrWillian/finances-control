@@ -44,7 +44,7 @@ const Input: React.FC<iCustomInputProps> = ({
       {getInputForType()}
 
       {!secureTextEntry ? <></>
-        : <Icon name={showPassword ? 'eye' : 'eye-off'}  size={30}  color="#2D142C" onPress={changeShowPasswordIcon} />
+        : <Icon style={{ marginRight: 20 }} name={showPassword ? 'eye' : 'eye-off'}  size={30}  color="#2D142C" onPress={changeShowPasswordIcon} />
       }
     </Container>
   );
