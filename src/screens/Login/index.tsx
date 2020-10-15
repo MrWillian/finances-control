@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
 import Input from '../../components/Input';
@@ -16,6 +16,19 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 
   let authController = new AuthController();
   let storageController = new StorageController();
+
+  useEffect(() => {
+    const getUserStorage: any = async () => {
+      const user = await storageController.getItem('@finances/user'); 
+      if (!(user === undefined)) {
+        navigation.navigate('MainStack');
+        console.log('OHH YES');
+      }
+
+    }
+
+    getUserStorage();
+  }, []);
 
   async function handleLogin() {
     await (authController.login(email, password)).then(user => {
