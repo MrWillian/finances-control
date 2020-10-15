@@ -1,5 +1,9 @@
 import styled from 'styled-components/native';
 
+interface ValueColor {
+  color?: string;
+}
+
 export const Container = styled.View`
   display: flex;
   flex: 1;
@@ -9,13 +13,16 @@ export const Container = styled.View`
 `;
 
 export const Title = styled.Text`
-  font-family: 'Glegoo';
-  font-size: 10px;
+  font-family: 'Comfortaa-Medium';
+  font-size: 12px;
   color: #FFF;
+  elevation: 10;
+  margin: 2px 0;
 `;
 
-export const Value = styled.Text`
-  font-family: 'Glegoo';
-  font-size: 14px;
-  color: #FFF;
+export const Value = styled.Text<ValueColor>`
+  font-family: 'Comfortaa-Bold';
+  font-weight: bold;
+  font-size: 12px;
+  color: ${props => props.color};
 `;
