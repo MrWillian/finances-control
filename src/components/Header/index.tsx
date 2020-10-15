@@ -17,10 +17,10 @@ const Header: React.FC<Props> = ({ navigation }) => {
   return (
     <Container>
       <TouchableOpacity onPress={openDrawer}>
-        <Icon name="sort" size={25} color="#FFD700" />
+        <Icon name="sort" size={22} color="#4F5A7D" />
       </TouchableOpacity>
       <TouchableOpacity>
-        <Icon name="person" size={25} color="#FFD700" />
+        <Icon name="person" size={22} color="#4F5A7D" />
       </TouchableOpacity>
     </Container>
   );

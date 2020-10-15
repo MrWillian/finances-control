@@ -1,21 +1,20 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  flex: 1;
+  display: flex;
   justify-content: center;
 `;
 
 export const Title = styled.Text`
-  font-family: 'Glegoo';
+  font-family: 'Comfortaa-Medium';
   font-size: 18px;
-  color: #C8C8C8;
+  color: #FDFDFD;
   margin-bottom: 10px;
 `;
 
 export const AccountsContainer = styled.View`
   flex: 1;
-  margin: 5px 0;
-  padding: 30px;
+  padding: 20px 30px;
 `;
 
 export const PlusButtonContainer = styled.TouchableOpacity`
@@ -24,29 +23,28 @@ export const PlusButtonContainer = styled.TouchableOpacity`
   justify-content: center;
   align-self: flex-end;
 
-  background-color: #FFD700;
+  background-color: #6269F1;
 
   width: 25px;
   height: 25px;
   margin: 10px 0;
   border-radius: 25px;
-  elevation: 20;
+  elevation: 10;
 `;
 
 export const BillsContainer = styled.View`
   flex: 1;
   display: flex;
   justify-content: center;
-  margin: 10px 0;
   padding: 30px;
 `;
 
 export const BillsTitle = styled.Text`
-  font-family: 'Glegoo';
+  font-family: 'Comfortaa-Medium';
   font-size: 18px;
-  color: #C8C8C8;
+  color: #FDFDFD;
 `;
 
 export const BillsScroll = styled.ScrollView`
-  margin: 20px 0;
+  margin: 10px 0;
 `;

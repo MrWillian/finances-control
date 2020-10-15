@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Loading from '../../components/Loading';
-import { iNavigationProps } from '../../utils/iNavigationProps';
+import { iNavigationProps } from '../../utils';
 
 import { StorageController } from '../../controllers';
 
@@ -13,7 +13,7 @@ const Splash: React.FC<iNavigationProps> = ({ navigation }) => {
   useEffect(() => {
     const getUserStorage: any = async () => {
       const user = await storageController.getItem('@finances/user'); 
-      if (user[0] === undefined) {
+      if (user === undefined) {
         navigation.navigate('Login');
       } else {
         navigation.navigate('MainStack');

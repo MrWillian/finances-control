@@ -22,10 +22,9 @@ const TransactionCard: React.FC<Props> = ({
   return (
     <LinearGradient 
       colors={[
-        'rgba(128, 19, 54, 1)', 
-        'rgba(128, 19, 54, 0.7)', 
-        'rgba(128, 19, 54, 0.5)', 
-        'rgba(128, 19, 54, 0.3)',
+        '#59668F', 
+        '#414D72',
+        '#2A3453', 
       ]}
       style={{
         flex: 1, 
@@ -40,11 +39,13 @@ const TransactionCard: React.FC<Props> = ({
       
       <Container>
         {type == TransactionType.BILLTOPAY 
-          ? (<Icon style={{alignSelf: 'flex-end'}} name="minuscircleo" size={25} color='#FFF' />)
-          : (<Icon style={{alignSelf: 'flex-end'}} name="pluscircleo" size={25} color='#FFF' />)
+          ? (<Icon style={{alignSelf: 'flex-end'}} name="minuscircleo" size={20} color='#FFF' />)
+          : (<Icon style={{alignSelf: 'flex-end'}} name="pluscircleo" size={20} color='#FFF' />)
         }
         <Title>{title}</Title>
-        <Value>{value}</Value>
+        <Value color={type == TransactionType.BILLTOPAY ? 'red' : 'green'}>
+          {value}
+        </Value>
       </Container>
 
     </LinearGradient>

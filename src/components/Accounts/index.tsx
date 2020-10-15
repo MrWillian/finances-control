@@ -33,11 +33,11 @@ const Accounts: React.FC = () => {
       type: TransactionType.BILLTOPAY,
     }, {
       title: 'Salário',
-      value: 'R$ 1.049,00',
+      value: 'R$ +1.049,00',
       type: TransactionType.BILLTORECEIVE,
     }, {
       title: 'Vendas semanais',
-      value: 'R$ 550,00',
+      value: 'R$ +550,00',
       type: TransactionType.BILLTORECEIVE,
     },
   ];
@@ -79,15 +79,16 @@ const Accounts: React.FC = () => {
 
       </BillsContainer>
 
-      <BottomSheet
+      {/* <BottomSheet
         ref={sheetRef}
+        // snapPoints={['60%', 0, 0]}
         snapPoints={['60%', 0, 0]}
         initialSnap={2}
         borderRadius={10}
         renderContent={NewAccountSheet}
         // enabledContentGestureInteraction={false}
         enabledContentTapInteraction={false}
-        />
+        /> */}
 
     </Container>
   );

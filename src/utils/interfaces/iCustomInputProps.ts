@@ -1,5 +1,5 @@
-import { FieldType } from "./FieldType";
-import { CapitalizeType } from "./CapitalizeType";
+import { FieldType } from "../enums/FieldType";
+import { CapitalizeType } from "../enums/CapitalizeType";
 
 export interface iCustomInputProps {
   name: string;
