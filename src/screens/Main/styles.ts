@@ -1,8 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  flex: 1;
-  background: #2D142C;
-  justify-content: center;
-  align-items: center;
+export const Container = styled.ScrollView.attrs({
+  contentContainerStyle: { flexGrow: 1 }
+})`
+  position: relative;
+  background-color: #283350;
 `;
