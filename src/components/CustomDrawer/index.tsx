@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 
+import { DrawerGradient } from '../Gradients';
 import { StorageController } from '../../controllers';
 
 import { 
@@ -29,24 +30,26 @@ const CustomDrawer: React.FC = () => {
   }
 
   return (
-    <Container>
-      <ItemsContainer>
-        {items.map((item, index) => {
-          return (
-            <ItemButton key={index}>
-              <ItemLabel>{item}</ItemLabel>
-            </ItemButton>
-          );
-        })}
-      </ItemsContainer>
-      <Bottom>
-        <LogoutButton onPress={logout}>
-          <LogoutButtonLabel>
-            Sair
-          </LogoutButtonLabel>
-        </LogoutButton>
-      </Bottom>
-    </Container>
+    <DrawerGradient>
+      <Container>
+        <ItemsContainer>
+          {items.map((item, index) => {
+            return (
+              <ItemButton key={index}>
+                <ItemLabel>{item}</ItemLabel>
+              </ItemButton>
+            );
+          })}
+        </ItemsContainer>
+        <Bottom>
+          <LogoutButton onPress={logout}>
+            <LogoutButtonLabel>
+              Sair
+            </LogoutButtonLabel>
+          </LogoutButton>
+        </Bottom>
+      </Container>
+    </DrawerGradient>
   );
 }
 
