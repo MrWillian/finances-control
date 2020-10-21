@@ -13,12 +13,9 @@ const Splash: React.FC<iNavigationProps> = ({ navigation }) => {
   useEffect(() => {
     const getUserStorage: any = async () => {
       const user = await storageController.getItem('@finances/user');
-      console.log(user === null);
       if (user === null) {
         navigation.navigate('Login');
       } else {
-        console.log('entrou');
-
         navigation.navigate('MainStack');
       }
     }
