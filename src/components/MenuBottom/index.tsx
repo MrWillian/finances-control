@@ -1,32 +1,22 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {default as OctIcon}  from 'react-native-vector-icons/Octicons';
 
-import { Container, MenuButton, MenuButtonContainer, MenuButtonLabel } from './styles';
+import { MenuBottomGradient } from '../Gradients';
+import MenuBottomButton from '../MenuBottomButton';
 
-const MenuBottom: React.FC = () => {
+import { Container } from './styles';
+
+interface Props {
+  activePage?: string;
+}
+
+const MenuBottom: React.FC<Props> = ({ activePage }) => {
   return (
     <Container>
-      <MenuButton>
-        <MenuButtonContainer>
-          <Icon style={{elevation: 10}} name="stats-chart" size={20} color="#91A0D0" />
-          <MenuButtonLabel>Estatísticas</MenuButtonLabel>
-        </MenuButtonContainer>
-      </MenuButton>
-
-      <MenuButton>
-        <MenuButtonContainer>
-          <Icon style={{elevation: 10}} name="home" size={20} color="#91A0D0" />
-          <MenuButtonLabel>Início</MenuButtonLabel>
-        </MenuButtonContainer>
-      </MenuButton>
-
-      <MenuButton>
-        <MenuButtonContainer>
-          <OctIcon style={{elevation: 10}} name="settings" size={20} color="#91A0D0" />
-          <MenuButtonLabel>Configurações</MenuButtonLabel>
-        </MenuButtonContainer>
-      </MenuButton>
+      <MenuBottomGradient>
+        <MenuBottomButton screen="Stats" isActive={activePage === 'Stats'} iconName="stats-chart" />
+        <MenuBottomButton screen="Main" isActive={activePage === 'Main'} iconName="home" />
+        <MenuBottomButton screen="Settings" isActive={activePage === 'Settings'} iconName="settings" />
+      </MenuBottomGradient>
     </Container>
   );
 }
