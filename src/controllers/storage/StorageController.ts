@@ -16,7 +16,7 @@ export default class StorageController {
       const jsonValue = await storage.load({ key });
       return jsonValue != null ? JSON.parse(jsonValue) : null;
     } catch(error) {
-      return error;
+      return null;
     }
   };
 
