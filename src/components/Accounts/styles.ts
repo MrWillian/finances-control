@@ -36,7 +36,7 @@ export const BillsContainer = styled.View`
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 30px;
+  padding: 10px 30px;
 `;
 
 export const BillsTitle = styled.Text`
