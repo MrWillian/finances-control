@@ -9,6 +9,7 @@ import { iNavigationProps, FieldType, CapitalizeType } from '../../utils';
 import { AuthController, StorageController } from '../../controllers';
 
 import { Container } from './styles';
+import { BackgroundGradient } from '../../components/Gradients';
 
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
@@ -22,7 +23,6 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
       const user = await storageController.getItem('@finances/user'); 
       if (!(user === undefined)) {
         navigation.navigate('MainStack');
-        console.log('OHH YES');
       }
 
     }
@@ -44,39 +44,41 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
   }
 
   return (
-    <Container>
-      <Title>Faça login com seu email e senha...</Title>
-      <SimpleForm>
-        <Input 
-          name="Email" 
-          value={email} 
-          icon="mail" 
-          onChangeText={(email: any) => setEmail(email)}
-          focus={true}
-          type={FieldType.TEXT}
-          textContentType='emailAddress'
-          keyboardType='email-address'
-          autoCapitalize={CapitalizeType.NONE}
-          autoCorrect={false}
-          autoCompleteType='email' />
-          
-        <Input 
-          name="Senha" 
-          value={password}  
-          icon="lock-closed" 
-          onChangeText={(password: any) => setPassword(password)}
-          type={FieldType.PASSWORD} />
+    <BackgroundGradient>
+      <Container>
+        <Title>Faça login com seu email e senha...</Title>
+        <SimpleForm>
+          <Input 
+            name="Email" 
+            value={email} 
+            icon="mail" 
+            onChangeText={(email: any) => setEmail(email)}
+            focus={true}
+            type={FieldType.TEXT}
+            textContentType='emailAddress'
+            keyboardType='email-address'
+            autoCapitalize={CapitalizeType.NONE}
+            autoCorrect={false}
+            autoCompleteType='email' />
+            
+          <Input 
+            name="Senha" 
+            value={password}  
+            icon="lock-closed" 
+            onChangeText={(password: any) => setPassword(password)}
+            type={FieldType.PASSWORD} />
 
-        <Button name="Entrar" onPress={handleLogin} />
-      </SimpleForm>
+          <Button name="Entrar" onPress={handleLogin} />
+        </SimpleForm>
 
-      <BottomInfo>
-        <BottomInfoText>Não tem uma conta?</BottomInfoText>
-        <BottomInfoLink navigation={navigation} route="Register">
-          Criar!
-        </BottomInfoLink>
-      </BottomInfo>
-    </Container>
+        <BottomInfo>
+          <BottomInfoText>Não tem uma conta?</BottomInfoText>
+          <BottomInfoLink navigation={navigation} route="Register">
+            Criar!
+          </BottomInfoLink>
+        </BottomInfo>
+      </Container>
+    </BackgroundGradient>
   );
 }
 

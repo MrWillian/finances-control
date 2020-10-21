@@ -7,7 +7,5 @@ export const Container = styled.ScrollView.attrs({
     flexGrow: 1
   }
 })`
-  padding: 10px 10px;
-  
-  background: #2D142C;
+  padding: 10px;
 `;

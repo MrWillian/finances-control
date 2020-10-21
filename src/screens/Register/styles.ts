@@ -8,5 +8,4 @@ export const Container = styled.ScrollView.attrs({
   }
 })`
   padding: 10px;
-  background: #2D142C;
 `;

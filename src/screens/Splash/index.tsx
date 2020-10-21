@@ -5,28 +5,32 @@ import { iNavigationProps } from '../../utils';
 import { StorageController } from '../../controllers';
 
 import { Container } from './styles';
+import { BackgroundGradient } from '../../components/Gradients';
 
 const Splash: React.FC<iNavigationProps> = ({ navigation }) => {
-
   let storageController = new StorageController();
 
   useEffect(() => {
     const getUserStorage: any = async () => {
-      const user = await storageController.getItem('@finances/user'); 
-      if (user === undefined) {
+      const user = await storageController.getItem('@finances/user');
+      console.log(user === null);
+      if (user === null) {
         navigation.navigate('Login');
       } else {
+        console.log('entrou');
+
         navigation.navigate('MainStack');
       }
     }
-
     getUserStorage();
   }, []);
 
   return (
-    <Container>
-      <Loading />
-    </Container>
+    <BackgroundGradient>
+      <Container>
+        <Loading />
+      </Container>
+    </BackgroundGradient>
   );
 }
 

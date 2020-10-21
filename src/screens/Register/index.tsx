@@ -10,6 +10,7 @@ import { iNavigationProps, FieldType, CapitalizeType } from '../../utils';
 import { AuthController, StorageController } from '../../controllers';
 
 import { Container } from './styles';
+import { BackgroundGradient } from '../../components/Gradients';
 
 const Register: React.FC<iNavigationProps> = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -35,56 +36,58 @@ const Register: React.FC<iNavigationProps> = ({ navigation }) => {
   }
 
   return (
-    <Container>
-      <Title>Crie sua conta...</Title>
-      <SimpleForm>
+    <BackgroundGradient>
+      <Container>
+        <Title>Crie sua conta...</Title>
+        <SimpleForm>
 
-        <Input 
-          name="Nome" 
-          value={name} 
-          icon="person" 
-          onChangeText={name => setName(name)}
-          type={FieldType.TEXT}
-          focus={true} />
+          <Input 
+            name="Nome" 
+            value={name} 
+            icon="person" 
+            onChangeText={name => setName(name)}
+            type={FieldType.TEXT}
+            focus={true} />
 
-        <Input 
-          name="Email" 
-          value={email} 
-          icon="mail" 
-          onChangeText={email => setEmail(email)}
-          type={FieldType.TEXT}
-          textContentType='emailAddress'
-          keyboardType='email-address'
-          autoCapitalize={CapitalizeType.NONE}
-          autoCorrect={false}
-          autoCompleteType='email' />
+          <Input 
+            name="Email" 
+            value={email} 
+            icon="mail" 
+            onChangeText={email => setEmail(email)}
+            type={FieldType.TEXT}
+            textContentType='emailAddress'
+            keyboardType='email-address'
+            autoCapitalize={CapitalizeType.NONE}
+            autoCorrect={false}
+            autoCompleteType='email' />
 
-        <Input 
-          name="Telefone" 
-          value={phoneNumber} 
-          icon="call" 
-          onChangeText={phoneNumber => setPhoneNumber(phoneNumber)}
-          type={FieldType.PHONENUMBER} />
+          <Input 
+            name="Telefone" 
+            value={phoneNumber} 
+            icon="call" 
+            onChangeText={phoneNumber => setPhoneNumber(phoneNumber)}
+            type={FieldType.PHONENUMBER} />
 
-        <Input 
-          name="Senha" 
-          value={password} 
-          icon="lock-closed" 
-          onChangeText={password => setPassword(password)}
-          type={FieldType.PASSWORD} />
-        
-        <Button name="Cadastrar" onPress={handleRegister} />
+          <Input 
+            name="Senha" 
+            value={password} 
+            icon="lock-closed" 
+            onChangeText={password => setPassword(password)}
+            type={FieldType.PASSWORD} />
+          
+          <Button name="Cadastrar" onPress={handleRegister} />
 
-      </SimpleForm>
-      <BottomInfo>
-        <BottomInfoText>
-          Já tem uma conta?
-        </BottomInfoText>
-        <BottomInfoLink navigation={navigation} route="Login">
-          Entrar!
-        </BottomInfoLink>
-      </BottomInfo>
-    </Container>
+        </SimpleForm>
+        <BottomInfo>
+          <BottomInfoText>
+            Já tem uma conta?
+          </BottomInfoText>
+          <BottomInfoLink navigation={navigation} route="Login">
+            Entrar!
+          </BottomInfoLink>
+        </BottomInfo>
+      </Container>
+    </BackgroundGradient>
   );
 }
 

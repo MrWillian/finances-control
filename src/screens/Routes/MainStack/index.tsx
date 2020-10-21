@@ -3,6 +3,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import Main from '../../Main';
+import Stats from '../../Stats';
+import Settings from '../../Settings';
 import CustomDrawer from '../../../components/CustomDrawer';
 
 const AppStack = createStackNavigator();
@@ -14,6 +16,8 @@ const MainStack: React.FC = () => {
       drawerContent={() => <CustomDrawer />}
       edgeWidth={0}>
       <AppStack.Screen name="Main" component={Main} />
+      <AppStack.Screen name="Stats" component={Stats} />
+      <AppStack.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }

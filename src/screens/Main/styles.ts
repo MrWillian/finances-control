@@ -4,5 +4,4 @@ export const Container = styled.ScrollView.attrs({
   contentContainerStyle: { flexGrow: 1 }
 })`
   position: relative;
-  background-color: #283350;
 `;
