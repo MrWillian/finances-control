@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Accounts from '../../components/Accounts';
 import { BackgroundGradient } from '../../components/Gradients';
@@ -12,20 +12,20 @@ import { iNavigationProps } from '../../utils/';
 import { Container } from './styles';
 
 const Main: React.FC<iNavigationProps> = ({ navigation }) => {
+  const [token, setToken] = useState('');
   let storageController = new StorageController();
 
   useEffect(() => {
-    const getUserStorage: any = async () => {
-      // console.log('MAIN', await storageController.getItem('@finances/user'));
-    }
-    getUserStorage();
+    const getTokenStorage: any = async () => setToken((await storageController.getItem('@finances/user'))['access_token']);
+    
+    getTokenStorage();
   }, []);
 
   return (
     <BackgroundGradient>
       <Container>
         <Header navigation={navigation} />
-        <Accounts />
+        <Accounts token={token} />
       </Container>
 
       <MenuBottom activePage={'Main'} />
