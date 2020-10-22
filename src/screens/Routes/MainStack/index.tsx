@@ -6,6 +6,7 @@ import Main from '../../Main';
 import Stats from '../../Stats';
 import Settings from '../../Settings';
 import CustomDrawer from '../../../components/CustomDrawer';
+import NewAccount from '../../NewAccount';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -18,6 +19,7 @@ const MainStack: React.FC = () => {
       <AppStack.Screen name="Main" component={Main} />
       <AppStack.Screen name="Stats" component={Stats} />
       <AppStack.Screen name="Settings" component={Settings} />
+      <AppStack.Screen name="NewAccount" component={NewAccount} />
     </Drawer.Navigator>
   );
 }
