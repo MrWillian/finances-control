@@ -8,8 +8,9 @@ import { BottomInfo, BottomInfoText, BottomInfoLink } from '../../components/Bot
 import { iNavigationProps, FieldType, CapitalizeType } from '../../utils';
 import { AuthController, StorageController } from '../../controllers';
 
-import { Container } from './styles';
 import { BackgroundGradient } from '../../components/Gradients';
+
+import { Container } from './styles';
 
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
@@ -21,12 +22,9 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
   useEffect(() => {
     const getUserStorage: any = async () => {
       const user = await storageController.getItem('@finances/user'); 
-      if (!(user === undefined)) {
+      if (!(user === undefined)) 
         navigation.navigate('MainStack');
-      }
-
     }
-
     getUserStorage();
   }, []);
 
