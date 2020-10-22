@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { Alert, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import BottomSheetBehavior from 'reanimated-bottom-sheet';
 import BottomSheet from 'reanimated-bottom-sheet';
+import { AccountController } from '../../controllers';
+import { Account, iToken } from '../../utils';
 
 import AccountCard from '../AccountCard';
 import NewAccountSheet from '../NewAccountSheet';
@@ -9,27 +13,21 @@ import NewAccountSheet from '../NewAccountSheet';
 import TransactionCard, { TransactionType } from '../TransactionCard';
 
 import { 
-  Container, AccountsContainer, Title, PlusButtonContainer, 
-  BillsContainer, BillsScroll, BillsTitle
+  Container, AccountsContainer, Title, PlusButtonContainer, BillsContainer, BillsScroll, BillsTitle
 } from './styles';
 
-const Accounts: React.FC = () => {
-  const sheetRef = React.useRef(null);
+const Accounts: React.FC<iToken> = ({ token }) => {
+  const [accounts, setAccounts] = useState<Account[]>([]);
 
-  const accounts = [
-    {
-      title: 'Conta Banco 1',
-      value: 'R$ 1.300,00'
-    }, {
-      title: 'Conta Banco 2',
-      value: 'R$ 4.800,00'
-    },
-  ];
+  const sheetRef = React.useRef(null);
+  const navigation = useNavigation();
+
+  let accountController = new AccountController(token);
 
   const transactions = [
     {
       title: 'Fat. Cartão',
-      value: 'R$ -10,00',
+      value: 'R$ -125,30',
       type: TransactionType.BILLTOPAY,
     }, {
       title: 'Salário',
@@ -42,6 +40,22 @@ const Accounts: React.FC = () => {
     },
   ];
 
+  useEffect(() => {
+    handleGetAccounts();
+  }, []);
+
+  async function handleGetAccounts() {
+    await (accountController.index()).then((accounts: Account[]) => {
+      if (accounts == undefined) {
+        Alert.alert('Erro', 'Ocorreu um erro ao tentar listar suas contas!', [{ style: "cancel" }]);
+        return;
+      }
+      setAccounts(accounts);
+    }).catch((error: any) => {
+      console.log(error);
+    });
+  }
+
   const openBottomSheet = () => {
     let openBottom: BottomSheetBehavior | null = sheetRef.current;
     openBottom!.snapTo(0);
@@ -53,11 +67,17 @@ const Accounts: React.FC = () => {
       <AccountsContainer>
         <Title>Contas</Title>
 
-        {accounts.map((account, index) => (
-          <AccountCard key={index} title={account.title} value={account.value} />
-        ))}
+        {accounts !== null ?
+          accounts.map((account: Account, index) => (
+            <AccountCard key={index} title={account.name} value={account.amount} />
+          ))
+        :
+         (<Text>
+            Nenhuma conta criada ainda...           
+         </Text>)
+        }
 
-        <PlusButtonContainer onPress={openBottomSheet}>
+        <PlusButtonContainer onPress={() => navigation.navigate('NewAccount')}>
           <Icon name="add" size={20} color="#FFF" />
         </PlusButtonContainer>
       </AccountsContainer>
@@ -82,7 +102,7 @@ const Accounts: React.FC = () => {
       {/* <BottomSheet
         ref={sheetRef}
         // snapPoints={['60%', 0, 0]}
-        snapPoints={['60%', 0, 0]}
+        snapPoints={['50%', '0%', 0]}
         initialSnap={2}
         borderRadius={10}
         renderContent={NewAccountSheet}
