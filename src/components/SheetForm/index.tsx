@@ -23,7 +23,7 @@ const SheetForm: React.FC = () => {
     getTokenStorage();
     
     if (token !== '') 
-    accountController = new AccountController(token);
+      accountController = new AccountController(token);
   }, []);
   
   const getTokenStorage: any = async () => setToken((await storageController.getItem('@finances/user'))['access_token']);
