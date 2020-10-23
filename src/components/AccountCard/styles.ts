@@ -1,3 +1,4 @@
+import Animated from 'react-native-reanimated';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -12,10 +13,28 @@ export const Container = styled.View`
   border-radius: 5px;
 `;
 
+export const DeleteContainer = styled.View`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: row;
+  padding-right: 10px;
+`;
+
+export const Card = Animated.createAnimatedComponent(styled.View`
+  position: relative;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`);
+
 export const AccountInfo = styled.View`
   display: flex;
   justify-content: center;
-
 `;
 
 export const Title = styled.Text`
@@ -31,14 +50,6 @@ export const Value = styled.Text`
   font-family: 'Comfortaa-SemiBold';
   font-weight: bold;
   color: #FDFDFD;
-`;
-
-export const Divisor = styled.View`
-  background-color: #424E71;
-  height: 0.5%;
-  width: 80%;
-
-  align-self: center;
 `;
 
 export const See = styled.TouchableOpacity`

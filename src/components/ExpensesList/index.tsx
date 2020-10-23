@@ -18,7 +18,7 @@ const ExpensesList: React.FC<Props> = ({expensesList}) => {
       description={item.description} 
       value={item.value} 
     />
-  )
+  );
 
   return (
     <FlatList<Expense>
