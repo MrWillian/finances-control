@@ -2,14 +2,6 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  padding: 20px 30px;
-`;
-
-export const Title = styled.Text`
-  font-family: 'Comfortaa-Medium';
-  font-size: 18px;
-  color: #FDFDFD;
-  margin-bottom: 10px;
 `;
 
 export const PlusButtonContainer = styled.TouchableOpacity`

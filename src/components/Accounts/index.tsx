@@ -3,6 +3,9 @@ import { Alert } from 'react-native';
 import BottomSheetBehavior from 'reanimated-bottom-sheet';
 import BottomSheet from 'reanimated-bottom-sheet';
 
+import LinearGradient from 'react-native-linear-gradient';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
+
 import NewAccountSheet from '../NewAccountSheet';
 import AccountsContainer from '../AccountsContainer';
 import TransactionCard, { TransactionType } from '../TransactionCard';
@@ -11,10 +14,11 @@ import { AccountController } from '../../controllers';
 import { Account, iToken } from '../../utils';
 
 import { 
-  Container, BillsContainer, BillsScroll, BillsTitle
+  Container, BillsContainer, BillsScroll, Title
 } from './styles';
 
 const Accounts: React.FC<iToken> = ({ token }) => {
+  const [visible, setVisible] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);
 
   const sheetRef = React.useRef(null);
@@ -40,11 +44,12 @@ const Accounts: React.FC<iToken> = ({ token }) => {
   useEffect(() => {
     async function handleGetAccounts() {
       await (accountController.index()).then((accounts: Account[]) => {
-        if (accounts == undefined) {
+        if (accounts === undefined) {
           Alert.alert('Erro', 'Ocorreu um erro ao tentar listar suas contas!', [{ style: "cancel" }]);
           return;
         }
         setAccounts(accounts);
+        setVisible(true);
       }).catch((error: any) => {
         console.log(error);
       });
@@ -60,10 +65,17 @@ const Accounts: React.FC<iToken> = ({ token }) => {
 
   return (
     <Container>
+
+      <Title>Contas</Title>
+      <ShimmerPlaceHolder 
+        style={{marginBottom: 5, width: '100%', borderRadius: 5}} 
+        LinearGradient={LinearGradient}
+        visible={visible} />
+
       <AccountsContainer accountsList={accounts} />
 
       <BillsContainer>
-        <BillsTitle>Movimentações</BillsTitle>
+        <Title>Movimentações</Title>
         
         <BillsScroll horizontal={true}>
 
