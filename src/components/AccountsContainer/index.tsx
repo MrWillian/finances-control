@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import AccountCard from '../AccountCard';
 import { Account } from '../../utils';
 
-import { Container, Title, PlusButtonContainer, Divisor } from './styles';
+import { Container, PlusButtonContainer, Divisor } from './styles';
 
 interface AccountsContainerProps {
   accountsList: Account[];
@@ -25,8 +25,6 @@ const AccountsContainer: React.FC<AccountsContainerProps> = ({ accountsList }) =
 
   return (
     <Container>
-      <Title>Contas</Title>
-
       {accountsList !== null ?
         <FlatList<Account>
           data={accountsList}
@@ -34,9 +32,7 @@ const AccountsContainer: React.FC<AccountsContainerProps> = ({ accountsList }) =
           renderItem={renderItem}
           ItemSeparatorComponent={Divisor} />
         :
-        (<Text>
-          Nenhuma conta criada ainda...           
-        </Text>)
+        (<Text>Nenhuma conta criada ainda...</Text>)
       }
 
       <PlusButtonContainer onPress={() => navigation.navigate('NewAccount')}>
