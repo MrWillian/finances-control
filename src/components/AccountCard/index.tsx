@@ -25,33 +25,38 @@ const AccountCard: React.FC<Props> = ({ title, value }) => {
       onMoveX(gestureState.dx);
     },
     onPanResponderTerminate: (event, gestureState) => {
-      onPanResponderRealease(gestureState);
+      onPanResponder(gestureState);
     },
     onPanResponderRelease: (event, gestureState) => {
-      onPanResponderRealease(gestureState);
+      onPanResponder(gestureState);
     },
   });
 
   const onMoveX = (dx: number) => {
     if (tasks.current !== null)
-      tasks.current.setNativeProps({style: { transform: [{ translateX: dx }] }});
+      tasks.current.setNativeProps({style: { transform: [{ translateX: -80 }] }});
   }
 
-  const onPanResponderRealease = (gestureState: PanResponderGestureState) => {
-    if (Math.abs(gestureState.dx) < Dimensions.get('window').width/2) {
-      if (tasks.current !== null)
-        tasks.current.setNativeProps({style: { transform: [{ translateX: 0 }]} });
-    }
+  const onPanResponder = (gestureState: PanResponderGestureState) => {
+    // if (Math.abs(gestureState.dx) < Dimensions.get('window').width/2) {
+    //   console.log('onPanResponderTerminate');
+    //   if (tasks.current !== null)
+    //     tasks.current.setNativeProps({style: { transform: [{ translateX: 0 }]} });
+    // }
     
     if (Math.abs(gestureState.dx) >= Dimensions.get('window').width/2) {
+      console.log('onPanResponderRelease');
+      console.log('Dimensions width', Dimensions.get('window').width);
       LayoutAnimation.configureNext(LayoutAnimation.create(300, 'easeInEaseOut', 'opacity'));
       if (tasks.current !== null)
         tasks.current.setNativeProps({style: { transform: [{ translateX: Dimensions.get('window').width }]} });
-      // handleDelete()
+      handleDelete();
     }
   }
 
   const handleSeeAccount = () => {}
+
+  const handleDelete = () => console.log('DELETE EVENT');
 
   return (
     <Container>
