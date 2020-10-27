@@ -9,19 +9,18 @@ export const Container = styled.View`
   align-items: center;
 
   /* margin: 10px 0; */
-  padding: 5px;
+  padding: 10px 5px;
   border-radius: 5px;
 `;
 
 export const DeleteContainer = styled.View`
   position: absolute;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  width: 20%;
+  
+  align-items: flex-end;
   justify-content: space-between;
-  align-items: center;
-  justify-content: flex-end;
   flex-direction: row;
-  padding-right: 10px;
 `;
 
 export const Card = Animated.createAnimatedComponent(styled.View`
