@@ -6,7 +6,7 @@ const storage = new Storage({
 
   storageBackend: AsyncStorage,
 
-  defaultExpires: 1000 * 3600 * 24,
+  defaultExpires: null,
 
   enableCache: true,
 
