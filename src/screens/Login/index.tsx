@@ -21,8 +21,8 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 
   useEffect(() => {
     const getUserStorage: any = async () => {
-      const user = await storageController.getItem('@finances/user'); 
-      if (!(user === undefined)) 
+      const user = await storageController.getItem('@finances/user');
+      if (!(user === undefined || user === null)) 
         navigation.navigate('MainStack');
     }
     getUserStorage();
