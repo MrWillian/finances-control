@@ -35,7 +35,7 @@ export default class AccountController {
     }
   }
 
-  async create(name: string, description: string, amount: number, token?: string) {
+  async create(name: string, description: string, amount: number, token: string) {
     this.config.headers = { Authorization: `Bearer ${token}` }
     try {
       const response = await api.post('accounts', { name, description, amount }, this.config);
@@ -48,7 +48,6 @@ export default class AccountController {
 
   async delete(id: number) {
     this.config.headers = { Authorization: `Bearer ${this.token}` }
-    console.log(this.config.headers);
     try {
       const response = await api.delete('accounts/'+id, this.config);
       return response;
