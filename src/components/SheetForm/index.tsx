@@ -1,32 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+
 import { Button } from '../FormBasicComponents/';
 import Input from '../Input';
 import { FieldType } from '../../utils';
-
-import { AccountController, StorageController } from '../../controllers';
+import { AccountController } from '../../controllers';
+import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 
 import { Container } from './styles';
-import { useNavigation } from '@react-navigation/native';
 
 const SheetForm: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
-  const [token, setToken] = useState('');
+  
+  const token = useSelector<ApplicationState, string>(state => state.credentials.token);
   const navigation = useNavigation();
 
-  let accountController: AccountController = new AccountController(token);
-  let storageController = new StorageController();
-
-  useEffect(() => {  
-    getTokenStorage();
-    
-    if (token !== '') 
-      accountController = new AccountController(token);
-  }, []);
-  
-  const getTokenStorage: any = async () => setToken((await storageController.getItem('@finances/user'))['access_token']);
+  const accountController = AccountController.getInstance();
 
   async function handleCreate() {
     await (accountController.create(name, description, +amount, token)).then(account => {
@@ -36,7 +29,7 @@ const SheetForm: React.FC = () => {
         ]);
         return;
       }
-      navigation.navigate('Main');
+      navigation.navigate('Main', { newAccount: account.data });
       console.log('data', account.data);
     }).catch(error => {
       console.log(error);
