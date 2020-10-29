@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
+import { useDispatch } from 'react-redux';
 
 import Input from '../../components/Input';
 import { SimpleForm, Title, Button } from '../../components/FormBasicComponents';
@@ -11,10 +12,13 @@ import { AuthController, StorageController } from '../../controllers';
 import { BackgroundGradient } from '../../components/Gradients';
 
 import { Container } from './styles';
+import { CredentialsTypes } from '../../../core/lib/adapters/redux/store/ducks/credentials/types';
 
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
 
   let authController = new AuthController();
   let storageController = new StorageController();
@@ -37,6 +41,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
         return;
       }
       storageController.setItem('@finances/user', user.data);
+      dispatch({ type: CredentialsTypes.SET_TOKEN, token: user.data.access_token });
       navigation.navigate('MainStack');
     });
   }
