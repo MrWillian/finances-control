@@ -26,32 +26,27 @@ const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
       return (gestureState.dx > 2 || gestureState.dx < -2 || gestureState.dy > 5 || gestureState.dy < -5);
     },
     onPanResponderMove: (event, gestureState) => { onMoveX(gestureState.dx); },
-    onPanResponderGrant: (event, gestureState) => {
-      deleteRef.current?.setNativeProps({ x: gestureState.dx + 120 });
-      
-    },
     onPanResponderTerminate: (event, gestureState) => { onPanResponder(gestureState); },
     onPanResponderRelease: (event, gestureState) => { onPanResponder(gestureState); },
   });
 
-  const onMoveX = (dx: number) => {
-    cardRef.current?.setNativeProps({style: { transform: [{ translateX: dx }] }});
-    deleteRef.current?.setNativeProps({style: { transform: [{translateX: dx+140}] }});
-  }
-
+  const onMoveX = (dx: number) => setRefsTranslateX(dx, dx+140);
+  
   const onPanResponder = (gestureState: PanResponderGestureState) => {
     const windowWidth = Dimensions.get('window').width;
-    if (Math.abs(gestureState.dx) < windowWidth/2) {
-      cardRef.current?.setNativeProps({style: { transform: [{ translateX: 0 }]} });
-      deleteRef.current?.setNativeProps({style: {transform: [{ translateX: 0 }]} });
-    }
+    if (Math.abs(gestureState.dx) < windowWidth/2) 
+      setRefsTranslateX(0, 0);
     
     if (Math.abs(gestureState.dx) >= windowWidth/2) {
       LayoutAnimation.configureNext(LayoutAnimation.create(300, 'easeInEaseOut', 'opacity'));
-      cardRef.current?.setNativeProps({style: { transform: [{ translateX: windowWidth }]} });
-      deleteRef.current?.setNativeProps({style: {transform:[{ translateX: -(windowWidth/4) }]}});
+      setRefsTranslateX(windowWidth, -(windowWidth/4));
       handleDeleteAccount(id);
     }
+  }
+
+  const setRefsTranslateX = (cardRefX: number, deleteRefX: number) => {
+    cardRef.current?.setNativeProps({style: { transform: [{ translateX: cardRefX }]} });
+    deleteRef.current?.setNativeProps({style: {transform:[{ translateX: deleteRefX }]}});
   }
 
   const handleSeeAccount = () => {}
