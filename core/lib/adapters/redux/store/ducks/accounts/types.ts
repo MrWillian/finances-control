@@ -1,6 +1,7 @@
 export enum AccountsTypes {
-  SAVE_ACCOUNT = '@accounts/SAVE_ACCOUNT',
-  UPDATE_ACCOUNT = '@accounts/UPDATE_ACCOUNT',
+  LOAD_REQUEST = '@accounts/LOAD_REQUEST',
+  LOAD_SUCCESS = '@accounts/LOAD_SUCCESS',
+  LOAD_FAILURE = '@accounts/LOAD_FAILURE',
   DELETE_ACCOUNT = '@accounts/DELETE_ACCOUNT',
 }
 
@@ -12,5 +13,6 @@ export interface Account {
 }
 
 export interface AccountsState {
-  readonly data: Account[]
+  readonly data: Account[],
+  readonly error: boolean,
 }
