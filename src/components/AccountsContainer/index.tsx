@@ -1,48 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useRef, useState } from 'react';
 import { FlatList, Text, LogBox, Alert } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
-import { AccountController } from '../../controllers';
-import { Account } from '../../utils';
+import { deleteAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
+import { ApplicationState } from '../../../core/lib/adapters/redux/store';
+import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
+
 import AccountCard from '../AccountCard';
 
 import { Container, PlusButtonContainer, Divisor } from './styles';
 
 const AccountsContainer: React.FC = () => {
-  const [accounts, setAccounts] = useState<Account[]>([]);
+  const accounts = useSelector<ApplicationState, Account[]>(state => state.accounts.data);
+  const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+
   const [visible, setVisible] = useState(false);
+  
   const navigation = useNavigation();
-  const accountController = AccountController.getInstance();
+  const dispatch = useDispatch();
 
   useEffect(() => { 
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    
-    handleGetAccounts();
+    dispatch(loadRequest());
   }, []);
 
-  async function handleGetAccounts() {
-    await (accountController.index()).then((accounts: Account[]) => {
-      if (accounts === undefined) {
-        Alert.alert('Erro', 'Ocorreu um erro ao tentar listar suas contas!', [{ style: "cancel" }]);
-        return;
-      }
-      setAccounts(accounts);
-      setVisible(true);
-    }).catch((error: any) => {
-      console.log(error);
-    });
-  }
+  useEffect(() => { accounts.length > 0 ? setVisible(true) : setVisible(false) }, [accounts]);
 
-  const handleDeleteAccount = async (id: number) => {
-    await (accountController.delete(id)).then(() => {
-      setAccounts(accounts.filter(account => id !== account.id));
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
+  const handleDeleteAccount = async (id: number) => dispatch(deleteAccount(id, token));
   
   const keyExtractor = (account: Account) => (account.id).toString();
 
@@ -53,8 +41,7 @@ const AccountsContainer: React.FC = () => {
     <Container>
       <ShimmerPlaceHolder 
         style={{marginBottom: 5, width: '100%', borderRadius: 5}} 
-        LinearGradient={LinearGradient}
-        visible={visible} />
+        LinearGradient={LinearGradient} visible={visible} />
 
       {accounts.length > 0 ?
         <FlatList<Account>
@@ -63,7 +50,7 @@ const AccountsContainer: React.FC = () => {
           renderItem={renderItem}
           ItemSeparatorComponent={Divisor} />
         :
-        <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text>
+        <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text> 
       }
 
       <PlusButtonContainer onPress={() => navigation.navigate('NewAccount')}>
