@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 
+import { CredentialsTypes } from '../../../core/lib/adapters/redux/store/ducks/credentials/types';
 import Input from '../../components/Input';
 import { SimpleForm, Title, Button } from '../../components/FormBasicComponents';
 import { BottomInfo, BottomInfoText, BottomInfoLink } from '../../components/BottomInfoComponents';
+import { BackgroundGradient } from '../../components/Gradients';
 
 import { iNavigationProps, FieldType, CapitalizeType } from '../../utils';
 import { AuthController, StorageController } from '../../controllers';
 
-import { BackgroundGradient } from '../../components/Gradients';
-
 import { Container } from './styles';
-import { CredentialsTypes } from '../../../core/lib/adapters/redux/store/ducks/credentials/types';
 
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');

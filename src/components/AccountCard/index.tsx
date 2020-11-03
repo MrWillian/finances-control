@@ -7,10 +7,10 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Container, DeleteContainer, Card, AccountInfo, Title, Value, See, SeeLabel } from './styles';
 
 interface Props {
-  id: number;
+  id?: number;
   title: string;
   value: string;
-  handleDelete(id: number): void;
+  handleDelete(id?: number): void;
 }
 
 const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
@@ -51,14 +51,14 @@ const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
 
   const handleSeeAccount = () => {}
 
-  const handleDeleteAccount = (id: number) => {
+  const handleDeleteAccount = (id?: number) => {
     Alert.alert(
       'Alerta', `Tem certeza que deseja excluir a conta '${title}'?`, [
-        { text: 'Sim', style: "default", onPress: () => handleDelete(id) },
-        { text: 'Não', style: "cancel", onPress: () => {
-          cardRef.current?.setNativeProps({style: { transform: [{ translateX: 0 }]} });
-          deleteRef.current?.setNativeProps({style: { transform: [{ translateX: 0 }]} });
-        }}
+        { text: 'Sim', style: "default", onPress: () => {
+          handleDelete(id);
+          deleteRef.current?.setNativeProps({style: { transform: [{ translateX: -Dimensions.get('window').width }]} });
+        }},
+        { text: 'Não', style: "cancel", onPress: () => setRefsTranslateX(0, 0) }
       ]
     );
   };

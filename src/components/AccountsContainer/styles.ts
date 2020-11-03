@@ -21,7 +21,7 @@ export const PlusButtonContainer = styled.TouchableOpacity`
 
 export const Divisor = styled.View`
   background-color: #424E71;
-  height: 0.8%;
+  height: 1%;
   width: 80%;
 
   align-self: center;
