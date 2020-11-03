@@ -54,10 +54,7 @@ const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
   const handleDeleteAccount = (id?: number) => {
     Alert.alert(
       'Alerta', `Tem certeza que deseja excluir a conta '${title}'?`, [
-        { text: 'Sim', style: "default", onPress: () => {
-          handleDelete(id);
-          deleteRef.current?.setNativeProps({style: { transform: [{ translateX: -Dimensions.get('window').width }]} });
-        }},
+        { text: 'Sim', style: "default", onPress: () => handleDelete(id) },
         { text: 'Não', style: "cancel", onPress: () => setRefsTranslateX(0, 0) }
       ]
     );
