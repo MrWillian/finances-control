@@ -1,19 +1,20 @@
 import React, { RefObject, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { 
-  PanResponder, Dimensions, UIManager, LayoutAnimation, View, PanResponderGestureState, Alert 
+  PanResponder, Dimensions, UIManager, LayoutAnimation, View, PanResponderGestureState, Alert
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 
 import { Container, DeleteContainer, Card, AccountInfo, Title, Value, See, SeeLabel } from './styles';
 
 interface Props {
-  id?: number;
-  title: string;
-  value: string;
+  account: Account;
   handleDelete(id?: number): void;
 }
 
-const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
+const AccountCard: React.FC<Props> = ({ account, handleDelete }) => {
+  const navigation = useNavigation();
   const cardRef: RefObject<View> = useRef(null);
   const deleteRef: RefObject<View> = useRef(null);
 
@@ -40,7 +41,7 @@ const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
     if (Math.abs(gestureState.dx) >= windowWidth/2) {
       LayoutAnimation.configureNext(LayoutAnimation.create(300, 'easeInEaseOut', 'opacity'));
       setRefsTranslateX(windowWidth, -(windowWidth/4));
-      handleDeleteAccount(id);
+      handleDeleteAccount();
     }
   }
 
@@ -49,15 +50,12 @@ const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
     deleteRef.current?.setNativeProps({style: {transform:[{ translateX: deleteRefX }]}});
   }
 
-  const handleSeeAccount = () => {}
+  const handleSeeAccount = () => navigation.navigate('ViewAccount', { params: account });
 
-  const handleDeleteAccount = (id?: number) => {
+  const handleDeleteAccount = () => {
     Alert.alert(
-      'Alerta', `Tem certeza que deseja excluir a conta '${title}'?`, [
-        { text: 'Sim', style: "default", onPress: () => {
-          handleDelete(id);
-          deleteRef.current?.setNativeProps({style: { transform: [{ translateX: -Dimensions.get('window').width }]} });
-        }},
+      'Alerta', `Tem certeza que deseja excluir a conta '${account.name}'?`, [
+        { text: 'Sim', style: "default", onPress: () => handleDelete(account.id) },
         { text: 'Não', style: "cancel", onPress: () => setRefsTranslateX(0, 0) }
       ]
     );
@@ -67,12 +65,11 @@ const AccountCard: React.FC<Props> = ({ id, title, value, handleDelete }) => {
     <Container>
       <DeleteContainer ref={deleteRef}>
         <Icon name="trash-o" size={20} color="#E97A8B" />
-        {/* <Title>Deletar conta</Title> */}
       </DeleteContainer>
       <Card ref={cardRef} {...panResponder.panHandlers}>
         <AccountInfo>
-          <Title>{title}</Title>
-          <Value>{value}</Value>
+          <Title>{account.name}</Title>
+          <Value>{account.amount}</Value>
         </AccountInfo>
         <See onPress={handleSeeAccount}>
           <SeeLabel>Visualizar</SeeLabel>
