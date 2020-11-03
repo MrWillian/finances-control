@@ -1,39 +1,37 @@
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../FormBasicComponents/';
 import Input from '../Input';
 import { FieldType } from '../../utils';
-import { AccountController } from '../../controllers';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
+import { createAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
 
 import { Container } from './styles';
+import { FlashMessage } from '../FlashMessage';
 
 const SheetForm: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [flashMessage, setFlashMessage] = useState(false);
   
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const accountController = AccountController.getInstance();
-
   async function handleCreate() {
-    await (accountController.create(name, description, +amount, token)).then(account => {
-      if (account.data == undefined) {
-        Alert.alert('Erro', 'Ocorreu um erro ao tentar registrar a conta, tente novamente!', [
-          { style: "cancel" }
-        ]);
-        return;
-      }
-      navigation.navigate('Main', { newAccount: account.data });
-      console.log('data', account.data);
-    }).catch(error => {
-      console.log(error);
-    });
+    const response = dispatch(createAccount({ name, description, amount }, token));
+    
+    if (response.payload.data) {
+      setFlashMessage(true);
+      setTimeout(() => { 
+        setFlashMessage(false); 
+        dispatch(loadRequest());
+        navigation.navigate('Main');
+      }, 3000);
+    }
   }
 
   return (
@@ -58,9 +56,9 @@ const SheetForm: React.FC = () => {
         onChangeText={(amount, rawAmount) => setAmount(rawAmount)}
         type={FieldType.MONEY} />
 
-      <Button 
-        name="Registrar" 
-        onPress={handleCreate} />
+      <Button name="Registrar" onPress={handleCreate} />
+
+      {flashMessage ? <FlashMessage message={'Conta criada com sucesso...'} /> : null}
 
     </Container>
   );
