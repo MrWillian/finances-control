@@ -16,6 +16,7 @@ import { Container } from './styles';
 const Login: React.FC<iNavigationProps> = ({ navigation }) => {
 	const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -32,15 +33,19 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
   }, []);
 
   async function handleLogin() {
+    setIsLoading(true);
+
     await (authController.login(email, password)).then(user => {
       if (user.data == undefined) {
         Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login, tente novamente!', [
           { style: "cancel" }
         ]);
+        setIsLoading(false);
         return;
       }
       storageController.setItem('@finances/user', user.data);
       dispatch({ type: CredentialsTypes.SET_TOKEN, token: user.data.access_token });
+      setIsLoading(false);
       navigation.navigate('MainStack');
     });
   }
@@ -70,7 +75,7 @@ const Login: React.FC<iNavigationProps> = ({ navigation }) => {
             onChangeText={(password: any) => setPassword(password)}
             type={FieldType.PASSWORD} />
 
-          <Button name="Entrar" onPress={handleLogin} />
+          <Button name="Entrar" isLoading={isLoading} onPress={handleLogin} />
         </SimpleForm>
 
         <BottomInfo>
