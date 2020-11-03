@@ -43,8 +43,8 @@ const AccountsContainer: React.FC = () => {
   
   const keyExtractor = (acc: Account, index: number) => acc.id !== undefined ? acc.id.toString() : index.toString();
   
-  const renderItem = ({item}: {item: Account}) =>
-    <AccountCard key={item.id} id={item.id} title={item.name} value={item.amount} handleDelete={handleDeleteAccount} />;
+  const renderItem = ({item}: {item: Account}) => 
+    <AccountCard key={item.id} account={item} handleDelete={handleDeleteAccount} />;
   
   const navigateToNewAccountScreen = () => navigation.navigate('NewAccount');
   
@@ -55,7 +55,7 @@ const AccountsContainer: React.FC = () => {
 
       {accounts.length > 0 ?
         <FlatList<Account>
-          style={{flex:1, height: 165}} extraData={accounts}
+          style={{flex:1, height: 165}}
           data={accounts} keyExtractor={keyExtractor} renderItem={renderItem} ItemSeparatorComponent={Divisor} />
         :
         <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text> 
