@@ -6,6 +6,7 @@ export interface iCustomInputProps {
   value: string;
   icon?: string;
   onChangeText(operation?: any, rawValue?: any): any;
+  onBlur?: (operation?: any) => any;
   showPassword?: boolean;
   type?: FieldType;
   focus?: boolean;
