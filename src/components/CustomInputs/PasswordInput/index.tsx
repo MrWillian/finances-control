@@ -3,7 +3,7 @@ import { Input } from '../../Input/styles';
 import { iCustomInputProps } from '../../../utils';
 
 const PasswordInput: React.FC<iCustomInputProps> = ({ 
-  name, value, onChangeText, focus, showPassword
+  name, value, onChangeText, onBlur, focus, showPassword
 }) => {
   return (
     <Input 
@@ -11,6 +11,7 @@ const PasswordInput: React.FC<iCustomInputProps> = ({
       autoFocus={focus} 
       value={value} 
       onChangeText={onChangeText} 
+      onBlur={onBlur}
       secureTextEntry={showPassword} />
   );
 }
