@@ -13,6 +13,7 @@ export default class AuthController {
     try {
       return await api.post('/register', { name, email, phone_number, password });
     } catch(error) {
+      console.log(error);
       return error;
     }
   }
