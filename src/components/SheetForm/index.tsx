@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../FormBasicComponents/';
-import Input from '../Input';
+import { Input } from '../Input';
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { createAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
