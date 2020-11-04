@@ -3,7 +3,7 @@ import { Input } from '../../Input/styles';
 import { iCustomInputProps } from '../../../utils';
 
 const TextInput: React.FC<iCustomInputProps> = ({ 
-  name, value, onChangeText, focus, autoCapitalize
+  name, value, onChangeText, onBlur, focus, autoCapitalize
 }) => {
   return (
     <Input 
@@ -11,6 +11,7 @@ const TextInput: React.FC<iCustomInputProps> = ({
       autoFocus={focus} 
       value={value} 
       onChangeText={onChangeText}
+      onBlur={onBlur}
       autoCapitalize={autoCapitalize} />
   );
 }
