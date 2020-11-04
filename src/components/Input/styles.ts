@@ -5,12 +5,9 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
 
-  margin: 10px 0;
-  padding-left: 20px;
-
   background: #FFF;
   border-radius: 10px;
-  min-width: 80%;
+  /* min-width: 80%; */
   elevation: 20;
 `;
 

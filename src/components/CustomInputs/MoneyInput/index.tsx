@@ -3,7 +3,7 @@ import { TextInputMask } from 'react-native-masked-text';
 import { iCustomInputProps } from '../../../utils';
 
 const MoneyInput: React.FC<iCustomInputProps> = ({ 
-  name, value, onChangeText, focus, includeRawValueInChangeText
+  name, value, onChangeText, onBlur, focus, includeRawValueInChangeText
 }) => {
   return (
     <TextInputMask
@@ -19,6 +19,7 @@ const MoneyInput: React.FC<iCustomInputProps> = ({
       }}
       value={value}
       onChangeText={onChangeText}
+      onBlur={onBlur}
       includeRawValueInChangeText={includeRawValueInChangeText}
       autoFocus={focus} />
   );

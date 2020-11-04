@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 
 import { Button } from '../FormBasicComponents/';
-import Input from '../Input';
+import { Input } from '../Input';
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { createAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
@@ -16,12 +16,14 @@ const SheetForm: React.FC = () => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
   const [flashMessage, setFlashMessage] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   async function handleCreate() {
+    setIsLoading(true);
     const response = dispatch(createAccount({ name, description, amount }, token));
     
     if (response.payload.data) {
@@ -30,6 +32,7 @@ const SheetForm: React.FC = () => {
         setFlashMessage(false); 
         dispatch(loadRequest());
         navigation.navigate('Main');
+        setIsLoading(false);
       }, 3000);
     }
   }
@@ -56,7 +59,7 @@ const SheetForm: React.FC = () => {
         onChangeText={(amount, rawAmount) => setAmount(rawAmount)}
         type={FieldType.MONEY} />
 
-      <Button name="Registrar" onPress={handleCreate} />
+      <Button name="Registrar" isLoading={isLoading} onPress={handleCreate} />
 
       {flashMessage ? <FlashMessage message={'Conta criada com sucesso...'} /> : null}
 
