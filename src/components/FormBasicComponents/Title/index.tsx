@@ -2,9 +2,13 @@ import React from 'react';
 
 import { Text } from './styles';
 
-const Title: React.FC = ({ children }) => {
+interface Props {
+  style?: {}
+}
+
+const Title: React.FC<Props> = ({ style, children }) => {
   return (
-    <Text>
+    <Text style={style}>
       {children}
     </Text>
   );
