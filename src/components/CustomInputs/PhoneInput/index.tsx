@@ -3,11 +3,11 @@ import { TextInputMask } from 'react-native-masked-text';
 import { iCustomInputProps } from '../../../utils';
 
 const PhoneInput: React.FC<iCustomInputProps> = ({ 
-  name, value, onChangeText, onBlur, focus
+  name, value, onChangeText, onBlur, focus, style
 }) => {
   return (
     <TextInputMask
-      style={{marginLeft: 10}}
+      style={[style, {marginLeft: 10}]}
       placeholder={name} 
       type={'cel-phone'}
       options={{
