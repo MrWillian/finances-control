@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
+import { StyleSheet, Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { Formik, FormikProps } from 'formik';
 import { Input } from "react-native-elements";
+import Icon from 'react-native-vector-icons/Ionicons';
 
+import { FlashMessage } from '../FlashMessage';
 import { Button, Title } from '../FormBasicComponents/';
 import { Input as CustomInput } from '../Input';
+
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { createAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
+import { validationSchema } from './validationSchema';
 
 import { Container } from './styles';
-import { FlashMessage } from '../FlashMessage';
-import { StyleSheet, Text } from 'react-native';
-import { validationSchema } from './validationSchema';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 interface FormValues {
   name: string;
