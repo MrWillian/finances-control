@@ -16,8 +16,8 @@ export const ItemButton = styled.TouchableOpacity`
 `;
 
 export const ItemLabel = styled.Text`
-  color: #FFF;
-  font-family: 'Glegoo';
+  color: #97A6D7;  
+  font-family: 'Comfortaa-Medium';
 `;
 
 export const Bottom = styled.View`
@@ -26,13 +26,13 @@ export const Bottom = styled.View`
 `;
 
 export const LogoutButton = styled.TouchableOpacity`
-
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const LogoutButtonLabel = styled.Text`
-  font-family: 'Glegoo';
-  font-weight: 700;
-  font-size: 14px;
-  color: #EE4540;
-  text-decoration: underline;
+  font-family: Comfortaa-Medium;
+  color: #FFF;
+  text-transform: uppercase;
+  margin-left: 10px;
 `;
