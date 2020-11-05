@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { DrawerGradient } from '../Gradients';
 import { StorageController } from '../../controllers';
@@ -43,9 +44,8 @@ const CustomDrawer: React.FC = () => {
         </ItemsContainer>
         <Bottom>
           <LogoutButton onPress={logout}>
-            <LogoutButtonLabel>
-              Sair
-            </LogoutButtonLabel>
+            <Icon name="log-out-outline" size={35} color="#97A6D7" />
+            <LogoutButtonLabel>Sair</LogoutButtonLabel>
           </LogoutButton>
         </Bottom>
       </Container>
