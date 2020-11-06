@@ -1,7 +1,7 @@
 import { action } from 'typesafe-actions';
 import { AccountsTypes, Account } from './types';
 
-export const loadRequest = () => action(AccountsTypes.LOAD_REQUEST);
+export const loadRequest = (token: string) => action(AccountsTypes.LOAD_REQUEST, { token });
 
 export const loadSuccess = (data: Account[]) => action(AccountsTypes.LOAD_SUCCESS, { data });
 
