@@ -27,14 +27,14 @@ const AccountsContainer: React.FC = () => {
 
   useEffect(() => { 
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    dispatch(loadRequest());
+    dispatch(loadRequest(token));
   }, []);
 
   useEffect(() => { accounts.length > 0 ? setVisible(true) : setVisible(false) }, [accounts]);
 
   const handleDeleteAccount = async (id: number) => {
     dispatch(deleteAccount(id, token));
-    dispatch(loadRequest());
+    dispatch(loadRequest(token));
     // if (response.error)
     // setAccounts.filter((account: Account) => account.id !== action.payload.id )
     setFlashMessage(true);
@@ -58,7 +58,7 @@ const AccountsContainer: React.FC = () => {
           style={{flex:1, height: 165}}
           data={accounts} keyExtractor={keyExtractor} renderItem={renderItem} ItemSeparatorComponent={Divisor} />
         :
-        <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text> 
+        <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text>
       }
       </ShimmerPlaceHolder>
 
