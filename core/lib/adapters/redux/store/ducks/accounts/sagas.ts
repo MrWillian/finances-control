@@ -5,8 +5,16 @@ import api from '../../../../../../../src/services/api';
 import { loadSuccess, loadFailure } from './actions';
 import { Account } from './types';
 
+interface LoadAction extends Action, ILoad { type: "LOAD_ACCOUNT" }
 interface CreateAction extends Action, ICreate { type: "CREATE_ACCOUNT" }
 interface DeleteAction extends Action, IDelete { type: "DELETE_ACCOUNT" }
+
+interface ILoad {
+  payload: {
+    data: Account,
+    token: string
+  }
+}
 
 interface ICreate {
   payload: {
@@ -22,11 +30,14 @@ interface IDelete {
   }
 }
 
-export function* load() {
+export function* load(action: LoadAction) {
   try {
-    const response = yield call(api.get, 'accounts');
-    yield put(loadSuccess(response.data.data));
+    const response = yield call(api.get, 'search/accounts', {
+      headers: { Authorization: `Bearer ${action.payload.token}` }
+    });
+    yield put(loadSuccess(response.data.data.data));
   } catch(error) {
+    console.log(error);
     yield put(loadFailure(error));
   }
 }
