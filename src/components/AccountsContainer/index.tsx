@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Text, LogBox } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import LinearGradient from 'react-native-linear-gradient';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
@@ -13,7 +11,7 @@ import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/t
 import { FlashMessage } from '../FlashMessage';
 import AccountCard from '../AccountCard';
 
-import { Container, PlusButtonContainer, Divisor } from './styles';
+import { Container, Divisor } from './styles';
 
 const AccountsContainer: React.FC = () => {
   const accounts = useSelector<ApplicationState, Account[]>(state => state.accounts.data);
@@ -21,8 +19,8 @@ const AccountsContainer: React.FC = () => {
 
   const [visible, setVisible] = useState(false);
   const [flashMessage, setFlashMessage] = useState(false);
-  
-  const navigation = useNavigation();
+  const time = new Date().getTime();
+
   const dispatch = useDispatch();
 
   useEffect(() => { 
@@ -30,8 +28,13 @@ const AccountsContainer: React.FC = () => {
     dispatch(loadRequest(token));
   }, []);
 
-  useEffect(() => { accounts.length > 0 ? setVisible(true) : setVisible(false) }, [accounts]);
+  useEffect(() => { setTimeout(() => { setVisible(true) }, 3000); }, [accounts]);
 
+  const keyExtractor = () => time.toString() + (Math.floor(Math.random() * Math.floor(time))).toString();
+   
+  const renderItem = ({item}: {item: Account}) => 
+    <AccountCard key={item.id} account={item} handleDelete={handleDeleteAccount} />;
+  
   const handleDeleteAccount = async (id: number) => {
     dispatch(deleteAccount(id, token));
     dispatch(loadRequest(token));
@@ -40,14 +43,7 @@ const AccountsContainer: React.FC = () => {
     setFlashMessage(true);
     setTimeout(() => { setFlashMessage(false) }, 3000);
   }
-  
-  const keyExtractor = (acc: Account, index: number) => acc.id !== undefined ? acc.id.toString() : index.toString();
-  
-  const renderItem = ({item}: {item: Account}) => 
-    <AccountCard key={item.id} account={item} handleDelete={handleDeleteAccount} />;
-  
-  const navigateToNewAccountScreen = () => navigation.navigate('NewAccount');
-  
+
   return (
     <Container>
       <ShimmerPlaceHolder 
@@ -57,14 +53,10 @@ const AccountsContainer: React.FC = () => {
         <FlatList<Account>
           style={{flex:1, height: 165}}
           data={accounts} keyExtractor={keyExtractor} renderItem={renderItem} ItemSeparatorComponent={Divisor} />
-        :
+        : 
         <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text>
       }
       </ShimmerPlaceHolder>
-
-      <PlusButtonContainer onPress={navigateToNewAccountScreen}>
-        <Icon name="add" size={20} color="#FFF" />
-      </PlusButtonContainer>
 
       {flashMessage ? <FlashMessage message={'Conta deletada com sucesso...'} /> : null}
 
