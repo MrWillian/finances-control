@@ -1,15 +1,18 @@
 import React from 'react';
 import BottomSheetBehavior from 'reanimated-bottom-sheet';
+import { useNavigation } from '@react-navigation/native';
 import BottomSheet from 'reanimated-bottom-sheet';
 
 import NewAccountSheet from '../NewAccountSheet';
 import AccountsContainer from '../AccountsContainer';
 import TransactionCard, { TransactionType } from '../TransactionCard';
 
-import { Container, BillsContainer, BillsScroll, Title} from './styles';
+import { Container, HeaderContainer, BillsContainer, BillsScroll, Title} from './styles';
+import PlusButton from '../PlusButton';
 
 const Accounts: React.FC = () => {
   const sheetRef = React.useRef(null);
+  const navigation = useNavigation();
 
   const transactions = [
     {
@@ -32,13 +35,23 @@ const Accounts: React.FC = () => {
     openBottom!.snapTo(0);
   }
 
+  const navigateToScreen = (screen: string) => navigation.navigate(screen);
+
   return (
     <Container>
-      <Title>Contas</Title>
+      <HeaderContainer>
+        <Title>Contas</Title>
+        <PlusButton onPress={() => navigateToScreen('NewAccount')} />
+      </HeaderContainer>
+
       <AccountsContainer />
 
       <BillsContainer>
-        <Title>Movimentações</Title>
+        <HeaderContainer>
+          <Title>Movimentações</Title>
+          <PlusButton onPress={() => navigateToScreen('NewTransaction')} />
+        </HeaderContainer>
+
         <BillsScroll horizontal={true}>
 
           {transactions.map((transaction, index) => (
