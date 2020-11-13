@@ -3,7 +3,7 @@ import { TextInputMask } from 'react-native-masked-text';
 import { iCustomInputProps } from '../../../utils';
 
 const DateTimeInput: React.FC<iCustomInputProps> = ({ 
-  name, value, onChangeText, onBlur, focus, includeRawValueInChangeText
+  name, value, onChangeText, onBlur, focus, includeRawValueInChangeText, ref
 }) => {
   return (
     <TextInputMask
@@ -11,13 +11,14 @@ const DateTimeInput: React.FC<iCustomInputProps> = ({
       placeholder={name} 
       type={'datetime'}
       options={{
-        format: 'DD/MM/YYYY HH:mm'
+        format: 'YYYY-MM-DD'
       }}
       value={value}
       onChangeText={onChangeText}
       onBlur={onBlur}
       includeRawValueInChangeText={includeRawValueInChangeText}
-      autoFocus={focus} />
+      autoFocus={focus} 
+      ref={ref} />
   );
 }
 
