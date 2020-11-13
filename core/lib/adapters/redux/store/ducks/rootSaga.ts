@@ -2,7 +2,9 @@ import { all, takeLatest } from "redux-saga/effects";
 
 import { create, load, remove } from "./accounts/sagas";
 import { AccountsTypes } from "./accounts/types";
-import { TransactionsTypes, load as loadTransactions } from "./transactions";
+import { 
+  TransactionsTypes, load as loadTransactions, create as createTransaction
+} from "./transactions";
 import { 
   TransactionCategoriesTypes, load as loadTransactionCategories 
 } from "./transactionCategories";
@@ -15,5 +17,7 @@ export default function* rootSaga() {
 
     takeLatest(TransactionsTypes.LOAD_REQUEST, loadTransactions),
     takeLatest(TransactionCategoriesTypes.LOAD_REQUEST, loadTransactionCategories),
+    
+    takeLatest(TransactionsTypes.CREATE_TRANSACTION, createTransaction),
   ]);
 }
