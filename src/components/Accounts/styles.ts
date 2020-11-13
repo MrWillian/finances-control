@@ -6,11 +6,18 @@ export const Container = styled.View`
   padding: 10px 30px;
 `;
 
+export const HeaderContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const BillsContainer = styled.View`
   flex: 1;
   display: flex;
   justify-content: center;
-  margin: 0 0 30px 0;
+  margin: 30px 0;
 `;
 
 export const Title = styled.Text`

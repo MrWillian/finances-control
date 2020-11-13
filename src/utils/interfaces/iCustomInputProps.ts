@@ -18,4 +18,5 @@ export interface iCustomInputProps {
   keyboardType?: string;
   autoCorrect?: boolean;
   autoCompleteType?: string;
+  ref?: any;
 }
