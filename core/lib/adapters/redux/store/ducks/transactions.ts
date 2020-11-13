@@ -9,6 +9,7 @@ export enum TransactionsTypes {
   LOAD_FAILURE = '@transactions/LOAD_FAILURE',
   LOAD_CREATE_SUCCESS = '@transactions/LOAD_CREATE_SUCCESS',
   LOAD_DELETE_SUCCESS = '@transactions/LOAD_DELETE_SUCCESS',
+  CREATE_TRANSACTION = '@transactions/CREATE',
 }
 
 export interface Transaction {
@@ -26,15 +27,19 @@ export interface TransactionsState {
   readonly error: boolean,
 }
 
-interface LoadAction extends Action, ILoad { type: "LOAD_ACCOUNT" }
+interface LoadAction extends Action, ILoad { type: "LOAD_TRANSACTION" }
+interface CreateAction extends Action, ICreate { type: "CREATE_TRANSACTION" }
 
 interface ILoad { payload: { data: Transaction, token: string } }
+interface ICreate { payload: { data: Transaction, token: string } }
 
 const INITIAL_STATE: TransactionsState = { data: [], error: false };
 
 export const loadRequest = (token: string) => action(TransactionsTypes.LOAD_REQUEST, { token });
-const loadSuccess = (data: Account[]) => action(TransactionsTypes.LOAD_SUCCESS, { data });
+const loadSuccess = (data: Transaction[]) => action(TransactionsTypes.LOAD_SUCCESS, { data });
 const loadFailure = (data: Error) => action(TransactionsTypes.LOAD_FAILURE, { data });
+export const createTransaction = (data: Transaction, token: string) => 
+  action(TransactionsTypes.CREATE_TRANSACTION, { data, token });
 
 const reducer: Reducer<TransactionsState> = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -54,6 +59,19 @@ export function* load(action: LoadAction) {
     });
     yield put(loadSuccess(response.data.data));
   } catch(error) {
+    yield put(loadFailure(error));
+  }
+}
+
+export function* create(action: CreateAction) {
+  try {
+    console.log('action', action);
+    const response = yield call(api.post, 'transactions', action.payload.data, {
+      headers: { Authorization: `Bearer ${action.payload.token}` }
+    });
+    yield put(loadSuccess(response.data.data));
+  } catch (error) {
+    console.log(error);
     yield put(loadFailure(error));
   }
 }
