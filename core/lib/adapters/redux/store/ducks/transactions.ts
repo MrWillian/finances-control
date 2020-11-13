@@ -65,7 +65,6 @@ export function* load(action: LoadAction) {
 
 export function* create(action: CreateAction) {
   try {
-    console.log('action', action);
     const response = yield call(api.post, 'transactions', action.payload.data, {
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
