@@ -7,7 +7,7 @@ import { iCustomInputProps, FieldType } from '../../utils';
 import { Container } from './styles';
 
 export const Input: React.FC<iCustomInputProps> = ({ 
-  name, icon, value, onChangeText, onBlur, focus, type, includeRawValueInChangeText, 
+  name, icon, value, onChangeText, onBlur, focus, type, includeRawValueInChangeText, ref,
   autoCapitalize, textContentType, keyboardType, autoCorrect, autoCompleteType, containerStyle, style
 }) => {
   const secureTextEntry = type === FieldType.PASSWORD;
@@ -40,7 +40,7 @@ export const Input: React.FC<iCustomInputProps> = ({
       case FieldType.DATETIME:
         return (<DateTimeInput 
           name={name} value={value} onChangeText={onChangeText} onBlur={onBlur} focus={focus} 
-          includeRawValueInChangeText={includeRawValueInChangeText} />)
+          includeRawValueInChangeText={includeRawValueInChangeText} ref={ref} />)
 
       default: 
         return;
