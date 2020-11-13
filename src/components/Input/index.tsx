@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { TextInput, PasswordInput, MoneyInput, PhoneInput } from '../CustomInputs';
+import { TextInput, PasswordInput, MoneyInput, PhoneInput, DateTimeInput } from '../CustomInputs';
 import { iCustomInputProps, FieldType } from '../../utils';
 
 import { Container } from './styles';
@@ -36,7 +36,12 @@ export const Input: React.FC<iCustomInputProps> = ({
         return (<MoneyInput 
           name={name} value={value} onChangeText={onChangeText} onBlur={onBlur} focus={focus} 
           includeRawValueInChangeText={includeRawValueInChangeText} />)
-          
+      
+      case FieldType.DATETIME:
+        return (<DateTimeInput 
+          name={name} value={value} onChangeText={onChangeText} onBlur={onBlur} focus={focus} 
+          includeRawValueInChangeText={includeRawValueInChangeText} />)
+
       default: 
         return;
     }
