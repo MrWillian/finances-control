@@ -6,19 +6,11 @@ import { Container, Title, Value } from './styles';
 
 interface Props {
   title: string;
-  value: string;
-  type: TransactionType;
+  value: number;
+  type: string;
 }
 
-export enum TransactionType {
-  BILLTOPAY,
-  BILLTORECEIVE
-}
-
-const TransactionCard: React.FC<Props> = ({ 
-  title, value, type
-}) => {
-
+const TransactionCard: React.FC<Props> = ({ title, value, type }) => {
   return (
     <LinearGradient 
       colors={[
@@ -38,13 +30,13 @@ const TransactionCard: React.FC<Props> = ({
       }}>
       
       <Container>
-        {type == TransactionType.BILLTOPAY 
+        {type === 'expense' 
           ? (<Icon style={{alignSelf: 'flex-end'}} name="minuscircleo" size={20} color='#FFF' />)
           : (<Icon style={{alignSelf: 'flex-end'}} name="pluscircleo" size={20} color='#FFF' />)
         }
         <Title>{title}</Title>
-        <Value color={type == TransactionType.BILLTOPAY ? 'red' : 'green'}>
-          {value}
+        <Value color={type === 'expense' ? 'red' : 'green'}>
+          {type === 'expense' ? ('-' + value) : ('+' + value)}
         </Value>
       </Container>
 
