@@ -69,7 +69,7 @@ const TransactionForm: React.FC = () => {
       setFlashMessage(true);
       setTimeout(() => { 
         setFlashMessage(false); 
-        // dispatch(loadRequest());
+        dispatch(loadRequest(token));
         navigation.navigate('Main');
         setIsLoading(false);
       }, 3000);
@@ -186,8 +186,7 @@ const TransactionForm: React.FC = () => {
     <>
       <Formik 
         initialValues={{
-          description: '', 
-          date: new Date().toISOString(),
+          description: '', date: new Date().toISOString(),
           value: '', type: '', account_id: '', category_id: ''
         }}
         onSubmit={handleCreate} validationSchema={validationSchema}>
