@@ -28,7 +28,7 @@ const AccountsContainer: React.FC = () => {
     dispatch(loadRequest(token));
   }, []);
 
-  useEffect(() => { setTimeout(() => { setVisible(true) }, 3000); }, [accounts]);
+  useEffect(() => { setTimeout(() => { setVisible(true) }, 2000); }, [accounts]);
 
   const keyExtractor = () => time.toString() + (Math.floor(Math.random() * Math.floor(time))).toString();
    

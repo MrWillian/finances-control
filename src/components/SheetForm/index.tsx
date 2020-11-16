@@ -44,7 +44,7 @@ const SheetForm: React.FC = () => {
       setFlashMessage(true);
       setTimeout(() => { 
         setFlashMessage(false); 
-        dispatch(loadRequest());
+        dispatch(loadRequest(token));
         navigation.navigate('Main');
         setIsLoading(false);
       }, 3000);

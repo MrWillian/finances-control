@@ -57,8 +57,9 @@ export function* load(action: LoadAction) {
     const response = yield call(api.get, 'search/transactions', {
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
-    yield put(loadSuccess(response.data.data));
+    yield put(loadSuccess(response.data.data.data));
   } catch(error) {
+    console.log(error);
     yield put(loadFailure(error));
   }
 }
