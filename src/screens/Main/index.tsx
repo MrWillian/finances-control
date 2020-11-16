@@ -4,6 +4,7 @@ import Accounts from '../../components/Accounts';
 import { BackgroundGradient } from '../../components/Gradients';
 import Header from '../../components/Header';
 import MenuBottom from '../../components/MenuBottom';
+import Transactions from '../../components/Transactions';
 
 import { StorageController, AccountController } from '../../controllers';
 import { iNavigationProps } from '../../utils/';
@@ -26,6 +27,7 @@ const Main: React.FC<iNavigationProps> = ({ navigation }) => {
       <Container>
         <Header navigation={navigation} />
         <Accounts />
+        <Transactions />
       </Container>
 
       <MenuBottom activePage={'Main'} />
