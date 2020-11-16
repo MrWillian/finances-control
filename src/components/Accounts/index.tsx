@@ -5,30 +5,13 @@ import BottomSheet from 'reanimated-bottom-sheet';
 
 import NewAccountSheet from '../NewAccountSheet';
 import AccountsContainer from '../AccountsContainer';
-import TransactionCard, { TransactionType } from '../TransactionCard';
-
-import { Container, HeaderContainer, BillsContainer, BillsScroll, Title} from './styles';
 import PlusButton from '../PlusButton';
+
+import { Container, HeaderContainer, Title } from './styles';
 
 const Accounts: React.FC = () => {
   const sheetRef = React.useRef(null);
   const navigation = useNavigation();
-
-  const transactions = [
-    {
-      title: 'Fat. Cartão',
-      value: 'R$ -125,30',
-      type: TransactionType.BILLTOPAY,
-    }, {
-      title: 'Salário',
-      value: 'R$ +1.049,00',
-      type: TransactionType.BILLTORECEIVE,
-    }, {
-      title: 'Vendas semanais',
-      value: 'R$ +550,00',
-      type: TransactionType.BILLTORECEIVE,
-    },
-  ];
   
   const openBottomSheet = () => {
     let openBottom: BottomSheetBehavior | null = sheetRef.current;
@@ -45,25 +28,6 @@ const Accounts: React.FC = () => {
       </HeaderContainer>
 
       <AccountsContainer />
-
-      <BillsContainer>
-        <HeaderContainer>
-          <Title>Movimentações</Title>
-          <PlusButton onPress={() => navigateToScreen('NewTransaction')} />
-        </HeaderContainer>
-
-        <BillsScroll horizontal={true}>
-
-          {transactions.map((transaction, index) => (
-            <TransactionCard 
-              key={index} 
-              title={transaction.title} 
-              value={transaction.value}
-              type={transaction.type} />
-          ))}
-          
-        </BillsScroll>
-      </BillsContainer>
 
       {/* <BottomSheet
         ref={sheetRef}
