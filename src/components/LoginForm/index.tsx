@@ -6,11 +6,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useDispatch } from 'react-redux';
 
 import { validationSchema } from './validationSchema';
-
 import { AuthController, StorageController } from '../../controllers';
 import { CredentialsTypes } from '../../../core/lib/adapters/redux/store/ducks/credentials/types';
 import { iNavigationProps, CapitalizeType } from '../../utils';
-import { SimpleForm, Title, Button } from '../../components/FormBasicComponents';
+import { SimpleForm, Button } from '../../components/FormBasicComponents';
 
 interface FormValues {
   email: string;
@@ -32,9 +31,7 @@ const LoginForm: React.FC<iNavigationProps> = ({ navigation }) => {
   
     await (authController.login(values.email, values.password)).then(user => {
       if (user.data == undefined) {
-        Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login, tente novamente!', [
-          { style: "cancel" }
-        ]);
+        Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login, tente novamente!', [{ style: "cancel" }]);
         setIsLoading(false);
         return;
       }
@@ -42,6 +39,8 @@ const LoginForm: React.FC<iNavigationProps> = ({ navigation }) => {
       dispatch({ type: CredentialsTypes.SET_TOKEN, token: user.data.access_token });
       setIsLoading(false);
       navigation.navigate('MainStack');
+      values.email = '';
+      values.password = '';
     });
   }
 
