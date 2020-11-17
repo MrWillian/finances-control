@@ -37,9 +37,7 @@ const RegisterForm: React.FC<iNavigationProps> = ({ navigation }) => {
     values.phoneNumber = values.phoneNumber.replace('(', '').replace(')', '').replace(' ', '').replace('-', '');
     await (authController.register(values.name, values.email, values.phoneNumber, values.password)).then(user => {
       if (user.data == undefined) {
-        Alert.alert('Erro', 'Ocorreu um erro ao tentar se registrar, tente novamente!', [
-          { style: "cancel" }
-        ]);
+        Alert.alert('Erro', 'Ocorreu um erro ao tentar se registrar, tente novamente!', [{ style: "cancel" }]);
         setIsLoading(false);
         return;
       }
@@ -47,6 +45,10 @@ const RegisterForm: React.FC<iNavigationProps> = ({ navigation }) => {
       dispatch({ type: CredentialsTypes.SET_TOKEN, token: user.data.access_token });
       setIsLoading(false);
       navigation.navigate('MainStack');
+      values.email = '';
+      values.name = '';
+      values.password = '';
+      values.phoneNumber = '';
     });
   }
 
