@@ -28,6 +28,8 @@ const MenuBottomButton: React.FC<Props> = ({ screen, isActive, iconName }) => {
           setLabel(MenuBottomEnum.MAIN_VALUE); break;
         case MenuBottomEnum.SETTINGS:
           setLabel(MenuBottomEnum.SETTINGS_VALUE); break;
+        case MenuBottomEnum.BALANCE:
+          setLabel(MenuBottomEnum.BALANCE_VALUE); break;
         default:
           break;
       }
