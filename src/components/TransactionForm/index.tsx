@@ -14,12 +14,13 @@ import { Input as CustomInput } from '../Input';
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
+import { loadRequest as loadRequestTransactions } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 import { loadRequest as loadRequestCategories } from '../../../core/lib/adapters/redux/store/ducks/transactionCategories';
+import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 import { validationSchema } from './validationSchema';
 import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 import { TransactionCategory } from '../../../core/lib/adapters/redux/store/ducks/transactionCategories';
 import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
-import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 
 import { Container, Scroll, InputContainer, Label } from './styles';
 
@@ -71,6 +72,7 @@ const TransactionForm: React.FC = () => {
         setFlashMessage(false); 
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
+        dispatch(loadRequestTransactions(token));
         navigation.navigate('Main');
         setIsLoading(false);
         values.description = '';
@@ -117,7 +119,8 @@ const TransactionForm: React.FC = () => {
           onBlur={() => { { setFieldTouched('description')}}}
           editable={!isSubmitting}
           errorStyle={{ color: 'red' }}
-          errorMessage={touched.description && errors.description ? errors.description : undefined} />
+          errorMessage={touched.description && errors.description ? errors.description : undefined}
+          focusable={true} />
         
         <InputContainer>
           <Label>Tipo</Label>
