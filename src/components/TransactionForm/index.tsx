@@ -73,6 +73,8 @@ const TransactionForm: React.FC = () => {
         dispatch(loadBalance(token));
         navigation.navigate('Main');
         setIsLoading(false);
+        values.description = '';
+        values.value = '';
       }, 3000);
     }
   }
