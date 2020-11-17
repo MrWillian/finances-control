@@ -11,6 +11,7 @@ export enum BalanceTypes {
 
 export interface Balance {
   total: number;
+  count: number;
   totalProfit: number;
   totalExpense: number;
   categoriesBalance: CategoryBalance[];
@@ -55,6 +56,7 @@ export function* load(action: LoadAction) {
 
     const balanceData: Balance[] = [{
       total: responseBalance.data.data.total,
+      count: responseBalance.data.data.count,
       totalProfit: responseBalance.data.data.profits,
       totalExpense: responseBalance.data.data.expenses,
       categoriesBalance: responseCategories.data.data
