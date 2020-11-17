@@ -3,6 +3,8 @@ import { ScrollView, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CategoryGradient from '../Gradients/CategoryGradient';
 
+import { CategoryBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
+
 import { 
   Container, 
   Header, 
@@ -14,12 +16,27 @@ import {
   CategoryValue,
 } from './styles';
 
-const TransactionsForCategory: React.FC = () => {
+interface Props {
+  categories?: CategoryBalance[];
+}
+
+const TransactionsForCategory: React.FC<Props> = ({ categories }) => {
 
   const data = [
     { name: "Comida", iconName: "fast-food", value: 130},
     { name: "Entretenimento", iconName: "game-controller", value: 140},
   ];
+
+  const iconNameResolve = (name: string) => {
+    switch(name) {
+      case 'Comida':
+        return 'fast-food';
+      case 'Entretenimento': 
+        return 'game-controller';
+      default:
+        return 'md-list-circle';
+    }
+  }
 
   return (
     <Container>
@@ -32,21 +49,23 @@ const TransactionsForCategory: React.FC = () => {
       </Header>
 
       <ScrollView>
-        {data.length > 0 ?
-          data.map((item, index) => 
+        {categories && categories.length > 0 ?
+          categories.map((category: CategoryBalance, index) => 
             <TransactionsForCategoryCard key={index}>
               <CategoryGradient>
                 <CategoryIcon>
-                  <Icon name={item.iconName} size={20} color="#FFF" />
+                  <Icon name={iconNameResolve(category.name)} size={20} color="#FFF" />
                 </CategoryIcon>
               </CategoryGradient>
 
-              <CategoryName>{item.name}</CategoryName>
-              <CategoryValue>- R$ {item.value}</CategoryValue>
+              <CategoryName>{category.name}</CategoryName>
+              <CategoryValue>- R$ {category.total}</CategoryValue>
             </TransactionsForCategoryCard>  
           )
           : 
-          <Text>Nenhuma movimentação...</Text>
+          <Text style={{fontFamily: 'Comfortaa-SemiBold', color: '#FFF', marginTop: 15}}>
+            Nenhuma movimentação criada...
+          </Text>
         }
       </ScrollView>
 
