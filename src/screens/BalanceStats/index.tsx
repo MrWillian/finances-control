@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
-import { Balance } from '../../../core/lib/adapters/redux/store/ducks/balance';
-import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/balance';
+import { Balance, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/balance';
 
 import { BackgroundGradient } from '../../components/Gradients';
 import BalanceCardGradient from '../../components/Gradients/BalanceCardGradient';
@@ -34,10 +33,7 @@ const BalanceStats: React.FC<iNavigationProps> = ({navigation}) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(loadRequest(token));
-    console.log('balance', balance[0]);
-  }, []);
+  useEffect(() => { dispatch(loadRequest(token)); }, []);
 
   return (
     <BackgroundGradient>
@@ -55,7 +51,7 @@ const BalanceStats: React.FC<iNavigationProps> = ({navigation}) => {
 
               <CountAccountsContainer>
                 <CountAccountsLabel>Contas:</CountAccountsLabel>
-                <CountAccountsValue>3</CountAccountsValue>
+                <CountAccountsValue>{balance.length > 0 ? balance[0].count : 0}</CountAccountsValue>
               </CountAccountsContainer>
 
               <ValuesContainer>
