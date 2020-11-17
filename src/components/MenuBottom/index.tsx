@@ -15,7 +15,8 @@ const MenuBottom: React.FC<Props> = ({ activePage }) => {
       <MenuBottomGradient>
         <MenuBottomButton screen="Stats" isActive={activePage === 'Stats'} iconName="stats-chart" />
         <MenuBottomButton screen="Main" isActive={activePage === 'Main'} iconName="home" />
-        <MenuBottomButton screen="Settings" isActive={activePage === 'Settings'} iconName="settings" />
+        <MenuBottomButton screen="Balance" isActive={activePage === 'Balance'} iconName="settings" />
+        {/* <MenuBottomButton screen="Settings" isActive={activePage === 'Settings'} iconName="settings" /> */}
       </MenuBottomGradient>
     </Container>
   );
