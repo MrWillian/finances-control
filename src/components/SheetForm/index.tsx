@@ -49,6 +49,9 @@ const SheetForm: React.FC = () => {
         dispatch(loadBalance(token));
         navigation.navigate('Main');
         setIsLoading(false);
+        values.name = '';
+        values.description = '';
+        values.amount = '';
       }, 3000);
     }
   }
