@@ -16,12 +16,12 @@ import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
 import { loadRequest as loadRequestCategories } from '../../../core/lib/adapters/redux/store/ducks/transactionCategories';
 import { validationSchema } from './validationSchema';
-
 import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 import { TransactionCategory } from '../../../core/lib/adapters/redux/store/ducks/transactionCategories';
+import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
+import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 
 import { Container, Scroll, InputContainer, Label } from './styles';
-import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 
 interface FormValues {
   description: string;
@@ -70,6 +70,7 @@ const TransactionForm: React.FC = () => {
       setTimeout(() => { 
         setFlashMessage(false); 
         dispatch(loadRequest(token));
+        dispatch(loadBalance(token));
         navigation.navigate('Main');
         setIsLoading(false);
       }, 3000);
