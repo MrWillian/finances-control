@@ -2,7 +2,7 @@ export enum MenuBottomEnum {
   STATS = 'Stats', 
   MAIN = 'Main', 
   SETTINGS = 'Settings', 
-  BALANCE = 'Balance',
+  BALANCE = 'BalanceStats',
   STATS_VALUE = 'Estatísticas', 
   MAIN_VALUE = 'Início', 
   SETTINGS_VALUE = 'Configurações',
