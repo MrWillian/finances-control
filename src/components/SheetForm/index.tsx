@@ -14,6 +14,7 @@ import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { createAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
 import { validationSchema } from './validationSchema';
+import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 
 import { Container } from './styles';
 
@@ -45,6 +46,7 @@ const SheetForm: React.FC = () => {
       setTimeout(() => { 
         setFlashMessage(false); 
         dispatch(loadRequest(token));
+        dispatch(loadBalance(token));
         navigation.navigate('Main');
         setIsLoading(false);
       }, 3000);
