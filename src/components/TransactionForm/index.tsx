@@ -39,7 +39,7 @@ const TransactionForm: React.FC = () => {
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
 
   const [selectedAccount, setSelectedAccount] = useState<React.ReactText>(accounts[0]?.name);
-  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(transactionCategories[0]?.name);
+  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(transactionCategories[1]?.name);
   const [type, setType] = useState<React.ReactText>('expense');
   const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +55,7 @@ const TransactionForm: React.FC = () => {
   function handleCreate(values: FormValues) {
     const transaction: Transaction = {
       account_id: search(selectedAccount, accounts)?.id,
-      category_id: search(selectedCategory, transactionCategories)?.id,
+      category_id: type !== 'profit' ? search(selectedCategory, transactionCategories)?.id : 1,
       date: values.date.slice(0, 10).replace('/', '-'),
       description: values.description,
       type: type.toString(),
