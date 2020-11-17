@@ -7,6 +7,7 @@ import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { deleteAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
+import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 
 import { FlashMessage } from '../FlashMessage';
 import AccountCard from '../AccountCard';
@@ -38,6 +39,7 @@ const AccountsContainer: React.FC = () => {
   const handleDeleteAccount = async (id: number) => {
     dispatch(deleteAccount(id, token));
     dispatch(loadRequest(token));
+    dispatch(loadBalance(token));
     // if (response.error)
     // setAccounts.filter((account: Account) => account.id !== action.payload.id )
     setFlashMessage(true);
