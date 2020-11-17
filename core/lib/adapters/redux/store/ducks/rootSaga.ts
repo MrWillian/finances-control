@@ -8,6 +8,9 @@ import {
 import { 
   TransactionCategoriesTypes, load as loadTransactionCategories 
 } from "./transactionCategories";
+import { 
+  BalanceTypes, load as loadBalance 
+} from "./balance";
 
 export default function* rootSaga() {
   return yield all([
@@ -17,6 +20,7 @@ export default function* rootSaga() {
 
     takeLatest(TransactionsTypes.LOAD_REQUEST, loadTransactions),
     takeLatest(TransactionCategoriesTypes.LOAD_REQUEST, loadTransactionCategories),
+    takeLatest(BalanceTypes.LOAD_REQUEST, loadBalance),
     
     takeLatest(TransactionsTypes.CREATE_TRANSACTION, createTransaction),
   ]);

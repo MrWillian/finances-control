@@ -9,7 +9,7 @@ import CustomDrawer from '../../../components/CustomDrawer';
 import NewAccount from '../../NewAccount';
 import ViewAccount from '../../ViewAccount';
 import NewTransaction from '../../NewTransaction';
-import Balance from '../../Balance';
+import BalanceStats from '../../BalanceStats';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -25,7 +25,7 @@ const MainStack: React.FC = () => {
       <AppStack.Screen name="NewAccount" component={NewAccount} />
       <AppStack.Screen name="NewTransaction" component={NewTransaction} />
       <AppStack.Screen name="ViewAccount" component={ViewAccount} />
-      <AppStack.Screen name="Balance" component={Balance} />
+      <AppStack.Screen name="BalanceStats" component={BalanceStats} />
     </Drawer.Navigator>
   );
 }
