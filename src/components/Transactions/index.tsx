@@ -39,15 +39,15 @@ const Transactions: React.FC = () => {
           
         <Scroll horizontal={true}>
           {transactions.length > 0 ?
-          transactions.map((transaction, index) => (
-            <TransactionCard 
-              key={index} 
-              title={transaction.description} 
-              value={transaction.value}
-              type={transaction.type} />
-          ))
-          :
-          <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma movimentação criada ainda...</Text>
+            transactions.map((transaction, index) => (
+              <TransactionCard 
+                key={index} 
+                title={transaction.description} 
+                value={transaction.value}
+                type={transaction.type} />
+            ))
+            :
+            <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma movimentação criada ainda...</Text>
           }
         </Scroll>
 
