@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
-import { Balance } from '../../../core/lib/adapters/redux/store/ducks/balance';
-import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/balance';
+import { Balance, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/balance';
 
 import { BackgroundGradient } from '../../components/Gradients';
 import BalanceCardGradient from '../../components/Gradients/BalanceCardGradient';
