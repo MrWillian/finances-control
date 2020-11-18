@@ -5,6 +5,7 @@ import credentials from './credentials';
 import transactions from './transactions';
 import transactionCategories from './transactionCategories';
 import balance from './balance';
+import settings from './settings';
 
 export default combineReducers({
   accounts,
@@ -12,4 +13,5 @@ export default combineReducers({
   transactions,
   transactionCategories,
   balance,
+  settings,
 });
