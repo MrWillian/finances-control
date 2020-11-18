@@ -11,7 +11,7 @@ export const Header = styled.View`
 `;
 
 export const LinkToAll = styled.TouchableOpacity`
-  width: 25%;
+  width: 18%;
   height: 100%;
   flex-direction: row;
   justify-content: space-around;
@@ -30,7 +30,7 @@ export const Label = styled.Text`
 
 export const TransactionsForCategoryCard = styled.View`
   flex: 1;
-  margin: 10px 0;
+  margin: 10px 0 0 0;
 
   flex-direction: row;
   align-items: center;

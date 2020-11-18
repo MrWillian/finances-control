@@ -14,14 +14,15 @@ import { Input as CustomInput } from '../Input';
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
+import { loadRequest as loadRequestTransactions } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 import { loadRequest as loadRequestCategories } from '../../../core/lib/adapters/redux/store/ducks/transactionCategories';
+import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 import { validationSchema } from './validationSchema';
-
 import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 import { TransactionCategory } from '../../../core/lib/adapters/redux/store/ducks/transactionCategories';
+import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 
 import { Container, Scroll, InputContainer, Label } from './styles';
-import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 
 interface FormValues {
   description: string;
@@ -39,7 +40,7 @@ const TransactionForm: React.FC = () => {
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
 
   const [selectedAccount, setSelectedAccount] = useState<React.ReactText>(accounts[0]?.name);
-  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(transactionCategories[0]?.name);
+  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(transactionCategories[1]?.name);
   const [type, setType] = useState<React.ReactText>('expense');
   const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,7 +56,7 @@ const TransactionForm: React.FC = () => {
   function handleCreate(values: FormValues) {
     const transaction: Transaction = {
       account_id: search(selectedAccount, accounts)?.id,
-      category_id: search(selectedCategory, transactionCategories)?.id,
+      category_id: type !== 'profit' ? search(selectedCategory, transactionCategories)?.id : 1,
       date: values.date.slice(0, 10).replace('/', '-'),
       description: values.description,
       type: type.toString(),
@@ -70,8 +71,12 @@ const TransactionForm: React.FC = () => {
       setTimeout(() => { 
         setFlashMessage(false); 
         dispatch(loadRequest(token));
+        dispatch(loadBalance(token));
+        dispatch(loadRequestTransactions(token));
         navigation.navigate('Main');
         setIsLoading(false);
+        values.description = '';
+        values.value = '';
       }, 3000);
     }
   }
@@ -114,7 +119,8 @@ const TransactionForm: React.FC = () => {
           onBlur={() => { { setFieldTouched('description')}}}
           editable={!isSubmitting}
           errorStyle={{ color: 'red' }}
-          errorMessage={touched.description && errors.description ? errors.description : undefined} />
+          errorMessage={touched.description && errors.description ? errors.description : undefined}
+          focusable={true} />
         
         <InputContainer>
           <Label>Tipo</Label>

@@ -41,10 +41,10 @@ const TransactionsForCategory: React.FC<Props> = ({ categories }) => {
   return (
     <Container>
       <Header>
-        <Label>Movimentações</Label>
+        <Label>Movimentações por Categoria</Label>
         <LinkToAll>
           <Label>Todas</Label>
-          <Icon name="ios-funnel" size={10} color="#C8C8C8" />
+          {/* <Icon name="ios-funnel" size={10} color="#C8C8C8" /> */}
         </LinkToAll>
       </Header>
 
@@ -59,7 +59,7 @@ const TransactionsForCategory: React.FC<Props> = ({ categories }) => {
               </CategoryGradient>
 
               <CategoryName>{category.name}</CategoryName>
-              <CategoryValue>- R$ {category.total}</CategoryValue>
+              <CategoryValue>{category.name === 'Lucro' ? '+' : '-'} R$ {category.total}</CategoryValue>
             </TransactionsForCategoryCard>  
           )
           : 
