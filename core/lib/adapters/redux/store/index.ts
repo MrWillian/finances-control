@@ -6,6 +6,7 @@ import { CredentialsState } from './ducks/credentials/types';
 import { TransactionsState } from './ducks/transactions';
 import { TransactionCategoriesState } from './ducks/transactionCategories';
 import { BalanceState } from './ducks/balance';
+import { SettingsState } from './ducks/settings';
 
 import rootReducer from './ducks/rootReducer';
 import rootSaga from './ducks/rootSaga';
@@ -16,6 +17,7 @@ export interface ApplicationState {
   transactions: TransactionsState,
   transactionCategories: TransactionCategoriesState,
   balance: BalanceState,
+  settings: SettingsState,
 }
 
 const sagaMiddleware = createSagaMiddleware();
