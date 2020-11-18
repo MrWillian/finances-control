@@ -2,15 +2,10 @@ import { all, takeLatest } from "redux-saga/effects";
 
 import { create, load, remove } from "./accounts/sagas";
 import { AccountsTypes } from "./accounts/types";
-import { 
-  TransactionsTypes, load as loadTransactions, create as createTransaction
-} from "./transactions";
-import { 
-  TransactionCategoriesTypes, load as loadTransactionCategories 
-} from "./transactionCategories";
-import { 
-  BalanceTypes, load as loadBalance 
-} from "./balance";
+import { TransactionsTypes, load as loadTransactions, create as createTransaction } from "./transactions";
+import { TransactionCategoriesTypes, load as loadTransactionCategories } from "./transactionCategories";
+import { BalanceTypes, load as loadBalance } from "./balance";
+import { SettingsTypes, load as loadSetting } from "./settings";
 
 export default function* rootSaga() {
   return yield all([
@@ -21,6 +16,7 @@ export default function* rootSaga() {
     takeLatest(TransactionsTypes.LOAD_REQUEST, loadTransactions),
     takeLatest(TransactionCategoriesTypes.LOAD_REQUEST, loadTransactionCategories),
     takeLatest(BalanceTypes.LOAD_REQUEST, loadBalance),
+    takeLatest(SettingsTypes.LOAD_REQUEST, loadSetting),
     
     takeLatest(TransactionsTypes.CREATE_TRANSACTION, createTransaction),
   ]);
