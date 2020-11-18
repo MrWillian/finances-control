@@ -13,10 +13,10 @@ const MenuBottom: React.FC<Props> = ({ activePage }) => {
   return (
     <Container>
       <MenuBottomGradient>
-        <MenuBottomButton screen="Stats" isActive={activePage === 'Stats'} iconName="stats-chart" />
+        {/* <MenuBottomButton screen="Stats" isActive={activePage === 'Stats'} iconName="stats-chart" /> */}
+        <MenuBottomButton screen="BalanceStats" isActive={activePage === 'BalanceStats'} iconName="stats-chart" />
         <MenuBottomButton screen="Main" isActive={activePage === 'Main'} iconName="home" />
-        <MenuBottomButton screen="BalanceStats" isActive={activePage === 'BalanceStats'} iconName="settings" />
-        {/* <MenuBottomButton screen="Settings" isActive={activePage === 'Settings'} iconName="settings" /> */}
+        <MenuBottomButton screen="Settings" isActive={activePage === 'Settings'} iconName="settings" />
       </MenuBottomGradient>
     </Container>
   );
