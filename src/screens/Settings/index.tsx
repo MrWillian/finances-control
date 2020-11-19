@@ -64,18 +64,16 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
     },
   ];
 
-  useEffect(() => { 
-    console.log('token 1', token);
+  useEffect(() => {
     setTimeout(() => { dispatch(loadRequest(token)); }, 1000);
     console.log('settings', settingsData);
-    console.log('hideTotalOfAccounts', hideTotalOfAccounts);
+    console.log('hideTotalOfAccounts 1', hideTotalOfAccounts);
   }, []);
 
   const toggleSwitch = () => {
-    console.log('token 2', token);
     setHideTotalOfAccounts(!hideTotalOfAccounts);
-    // console.log('hideTotalOfAccounts', hideTotalOfAccounts);
-    dispatch(updateSettings({ hideTotalOfAccounts: hideTotalOfAccounts }, token));
+    console.log('hideTotalOfAccounts 2', hideTotalOfAccounts);
+    dispatch(updateSettings({ id: settingsData[0].id, hideTotalOfAccounts: hideTotalOfAccounts }, token));
   };
 
   return (
