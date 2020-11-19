@@ -15,6 +15,7 @@ export interface Settings {
   theme?: string;
   language?: string;
   hideTotalOfAccounts?: boolean;
+  allowNotifications?: boolean;
 }
 
 export interface SettingsState {
