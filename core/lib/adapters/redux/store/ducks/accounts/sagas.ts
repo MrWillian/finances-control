@@ -9,26 +9,9 @@ interface LoadAction extends Action, ILoad { type: "LOAD_ACCOUNT" }
 interface CreateAction extends Action, ICreate { type: "CREATE_ACCOUNT" }
 interface DeleteAction extends Action, IDelete { type: "DELETE_ACCOUNT" }
 
-interface ILoad {
-  payload: {
-    data: Account,
-    token: string
-  }
-}
-
-interface ICreate {
-  payload: {
-    data: Account,
-    token: string
-  }
-}
-
-interface IDelete {
-  payload: {
-    id: number,
-    token: string
-  }
-}
+interface ILoad { payload: { data: Account, token: string }}
+interface ICreate { payload: { data: Account, token: string }}
+interface IDelete { payload: { id: number, token: string }}
 
 export function* load(action: LoadAction) {
   try {
