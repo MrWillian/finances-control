@@ -23,6 +23,7 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
 
   const [themeSheetIsVisible, setThemeSheetIsVisible] = useState(false);
   const [languageSheetIsVisible, setLanguageSheetIsVisible] = useState(false);
+  const [allowNotifications, setAllowNotifications] = useState(settingsData[0]?.allowNotifications);
   const [hideTotalOfAccounts, setHideTotalOfAccounts] = useState(
     settingsData.length > 0 ? settingsData[0]?.hideTotalOfAccounts : false 
   );
@@ -76,6 +77,8 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
     dispatch(updateSettings({ id: settingsData[0].id, hideTotalOfAccounts: hideTotalOfAccounts }, token));
   };
 
+  const toggleAllowNotificationsSwitch = () => setAllowNotifications(!allowNotifications);
+
   return (
     <BackgroundGradient>
       <Header navigation={navigation} />
@@ -114,7 +117,16 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
 
           <SettingsItemMenu>
             <Title>Alertas e Notificações</Title>
-
+            <SettingsItem>
+              <SettingsItemLabel>Permitir notificações</SettingsItemLabel>
+              <Switch 
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={allowNotifications ? "#C8C8C8" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleAllowNotificationsSwitch}
+                value={allowNotifications}
+              />
+            </SettingsItem>
           </SettingsItemMenu>
         </SettingsMenu>
       </Content>
