@@ -4,15 +4,17 @@ import { call, put } from 'redux-saga/effects';
 import api from '../../../../../../src/services/api';
 
 export enum SettingsTypes {
-  LOAD_REQUEST = '@balance/LOAD_REQUEST',
-  LOAD_SUCCESS = '@balance/LOAD_SUCCESS',
-  LOAD_FAILURE = '@balance/LOAD_FAILURE',
+  LOAD_REQUEST = '@settings/LOAD_REQUEST',
+  LOAD_SUCCESS = '@settings/LOAD_SUCCESS',
+  LOAD_FAILURE = '@settings/LOAD_FAILURE',
+  UPDATE_SETTINGS = '@settings/UPDATE_SETTINGS',
 }
 
 export interface Settings {
-  theme: string;
-  language: string;
-  hideTotalOfAccounts: boolean;
+  id?: number;
+  theme?: string;
+  language?: string;
+  hideTotalOfAccounts?: boolean;
 }
 
 export interface SettingsState {
@@ -20,13 +22,15 @@ export interface SettingsState {
   readonly error: boolean,
 }
 
-interface LoadAction extends Action, ILoad { type: "LOAD_SETTING" }
+interface LoadAction extends Action, ISettingsAction { type: "LOAD_SETTING" }
+interface UpdateAction extends Action, ISettingsAction { type: "UPDATE_SETTINGS" }
 
-interface ILoad { payload: { data: Settings, token: string }}
+interface ISettingsAction { payload: { data: Settings, token: string }}
 
 const INITIAL_STATE: SettingsState = { data: [], error: false };
 
 export const loadRequest = (token: string) => action(SettingsTypes.LOAD_REQUEST, { token });
+export const updateSettings = (data: Settings, token: string) => action(SettingsTypes.UPDATE_SETTINGS, {data, token});
 const loadSuccess = (data: Settings[]) => action(SettingsTypes.LOAD_SUCCESS, { data });
 const loadFailure = (data: Error) => action(SettingsTypes.LOAD_FAILURE, { data });
 
@@ -36,6 +40,8 @@ const reducer: Reducer<SettingsState> = (state = INITIAL_STATE, action) => {
       return { ...state, error: false, data: action.payload.data };
     case SettingsTypes.LOAD_FAILURE:
       return { ...state, error: true, data: action.payload.data };
+    case SettingsTypes.UPDATE_SETTINGS:
+      return { ...state, error: false, data: action.payload.data };
     default: 
       return state;
   }
@@ -48,8 +54,21 @@ export function* load(action: LoadAction) {
     });
     yield put(loadSuccess(response.data.data.data));
   } catch(error) {
+    yield put(loadFailure({ name: "Error", message: error, stack: undefined }));
+  }
+}
+
+export function* update(action: UpdateAction) {
+  try {
+    console.log('action', action);
+    const response = yield call(api.put, 'settings/' + action.payload.data.id, action.payload.data, {
+      headers: { Authorization: `Bearer ${action.payload.token}` }
+    });
+    console.log('response', response.data.data);
+    yield put(loadSuccess(response.data.data));
+  } catch(error) {
     console.log('error', error);
-    yield put(loadFailure(error));
+    yield put(loadFailure({ name: "Error", message: error, stack: undefined }));
   }
 }
 

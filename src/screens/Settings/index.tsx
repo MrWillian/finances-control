@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Switch } from 'react-native';
 import { BottomSheet, ListItem } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useDispatch, useSelector } from 'react-redux';
+import { ApplicationState } from '../../../core/lib/adapters/redux/store';
+import { 
+  Settings as SettingsData, loadRequest, updateSettings 
+} from '../../../core/lib/adapters/redux/store/ducks/settings';
 
 import { BackgroundGradient } from '../../components/Gradients';
 import Header from '../../components/Header';
 import MenuBottom from '../../components/MenuBottom';
-
 import { iNavigationProps } from '../../utils';
 
 import { 
@@ -14,11 +18,19 @@ import {
 } from './styles';
 
 const Settings: React.FC<iNavigationProps> = ({navigation}) => {
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(!isEnabled);
+  const settingsData = useSelector<ApplicationState, SettingsData[]>(state => state.settings.data);
+  const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+
   const [themeSheetIsVisible, setThemeSheetIsVisible] = useState(false);
   const [languageSheetIsVisible, setLanguageSheetIsVisible] = useState(false);
-
+  const [hideTotalOfAccounts, setHideTotalOfAccounts] = useState(
+    settingsData.length > 0 ? settingsData[0]?.hideTotalOfAccounts : false 
+  );
+  const [theme, setTheme] = useState(settingsData[0]?.theme);
+  const [language, setLanguage] = useState(settingsData[0]?.language);
+  
+  const dispatch = useDispatch();
+  
   const themeList = [
     { 
       title: 'Dark', 
@@ -52,6 +64,18 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
     },
   ];
 
+  useEffect(() => {
+    setTimeout(() => { dispatch(loadRequest(token)); }, 1000);
+    console.log('settings', settingsData);
+    console.log('hideTotalOfAccounts 1', hideTotalOfAccounts);
+  }, []);
+
+  const toggleSwitch = () => {
+    setHideTotalOfAccounts(!hideTotalOfAccounts);
+    console.log('hideTotalOfAccounts 2', hideTotalOfAccounts);
+    dispatch(updateSettings({ id: settingsData[0].id, hideTotalOfAccounts: hideTotalOfAccounts }, token));
+  };
+
   return (
     <BackgroundGradient>
       <Header navigation={navigation} />
@@ -79,10 +103,10 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
               <SettingsItemLabel>Esconder saldo de contas</SettingsItemLabel>
               <Switch 
                 trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isEnabled ? "#C8C8C8" : "#f4f3f4"}
+                thumbColor={hideTotalOfAccounts ? "#C8C8C8" : "#f4f3f4"}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
-                value={isEnabled}
+                value={hideTotalOfAccounts}
               />
             </SettingsItem>
 
