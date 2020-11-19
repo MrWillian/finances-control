@@ -64,8 +64,8 @@ export function* update(action: UpdateAction) {
     const response = yield call(api.put, 'settings/' + action.payload.data.id, action.payload.data, {
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
-    console.log('response', response);
-    yield put(loadSuccess(response.data.data.data));
+    console.log('response', response.data.data);
+    yield put(loadSuccess(response.data.data));
   } catch(error) {
     console.log('error', error);
     yield put(loadFailure({ name: "Error", message: error, stack: undefined }));
