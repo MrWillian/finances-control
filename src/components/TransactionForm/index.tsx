@@ -117,7 +117,7 @@ const TransactionForm: React.FC = () => {
           value={values.description}
           onChangeText={value => setFieldValue('description', value)}
           onBlur={() => { { setFieldTouched('description')}}}
-          editable={!isSubmitting}
+          // editable={!isSubmitting}
           errorStyle={{ color: 'red' }}
           errorMessage={touched.description && errors.description ? errors.description : undefined}
           focusable={true} />
