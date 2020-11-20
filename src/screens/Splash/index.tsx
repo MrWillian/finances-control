@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import Loading from '../../components/Loading';
 import { iNavigationProps } from '../../utils';
+import { BackgroundGradient } from '../../components/Gradients';
 
 import { StorageController } from '../../controllers';
 
 import { Container } from './styles';
-import { BackgroundGradient } from '../../components/Gradients';
 
 const Splash: React.FC<iNavigationProps> = ({ navigation }) => {
   let storageController = new StorageController();
