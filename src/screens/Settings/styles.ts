@@ -1,14 +1,12 @@
 import styled from 'styled-components/native';
 
 export const Content = styled.View`
-  padding: 30px;
+  padding: 20px 30px;
 `;
 
 export const SettingsMenu = styled.View``;
 
-export const SettingsItemMenu = styled.View`
-  
-`;
+export const SettingsItemMenu = styled.View``;
 
 export const Title = styled.Text`
   font-family: Comfortaa-Bold;
