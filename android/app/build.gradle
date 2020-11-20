@@ -151,17 +151,23 @@ android {
             keyPassword 'android'
         }
         release {
-            if (System.getenv()["CI"]) {
-                storeFile file('/tmp/keystore.keystore')
-                storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
-                keyAlias System.getenv()["CM_KEY_ALIAS_USERNAME"]
-                keyPassword System.getenv()["CM_KEY_ALIAS_PASSWORD"]
-            } else {
-                storeFile file('../../keys/codemagic.keystore')
-                storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
-                keyAlias System.getenv()["CM_KEY_ALIAS_USERNAME"]
-                keyPassword System.getenv()["CM_KEY_ALIAS_PASSWORD"]
+            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
+                storeFile file(MYAPP_RELEASE_STORE_FILE)
+                storePassword MYAPP_RELEASE_STORE_PASSWORD
+                keyAlias MYAPP_RELEASE_KEY_ALIAS
+                keyPassword MYAPP_RELEASE_KEY_PASSWORD
             }
+            // if (System.getenv()["CI"]) {
+            //     storeFile file('/tmp/keystore.keystore')
+            //     storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+            //     keyAlias System.getenv()["CM_KEY_ALIAS_USERNAME"]
+            //     keyPassword System.getenv()["CM_KEY_ALIAS_PASSWORD"]
+            // } else {
+            //     storeFile file('../../keys/codemagic.keystore')
+            //     storePassword System.getenv()["CM_KEYSTORE_PASSWORD"]
+            //     keyAlias System.getenv()["CM_KEY_ALIAS_USERNAME"]
+            //     keyPassword System.getenv()["CM_KEY_ALIAS_PASSWORD"]
+            // }
         }
     }
     buildTypes {
@@ -171,7 +177,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
