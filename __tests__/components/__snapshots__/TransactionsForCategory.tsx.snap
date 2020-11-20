@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with defaults 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexBasis": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "justifyContent": "space-between",
+        },
+      ]
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#C8C8C8",
+            "fontFamily": "Comfortaa-Medium",
+            "fontSize": 12,
+          },
+        ]
+      }
+    >
+      Movimentações por Categoria
+    </Text>
+    <View
+      accessible={true}
+      focusable={false}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#222f52",
+          "borderRadius": 25,
+          "flexDirection": "row",
+          "height": "100%",
+          "justifyContent": "space-around",
+          "opacity": 1,
+          "paddingBottom": 5,
+          "paddingLeft": 5,
+          "paddingRight": 5,
+          "paddingTop": 5,
+          "width": "18%",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#C8C8C8",
+              "fontFamily": "Comfortaa-Medium",
+              "fontSize": 12,
+            },
+          ]
+        }
+      >
+        Todas
+      </Text>
+    </View>
+  </View>
+  <RCTScrollView>
+    <View>
+      <Text
+        style={
+          Object {
+            "color": "#FFF",
+            "fontFamily": "Comfortaa-SemiBold",
+            "marginTop": 15,
+          }
+        }
+      >
+        Nenhuma movimentação criada...
+      </Text>
+    </View>
+  </RCTScrollView>
+</View>
+`;
