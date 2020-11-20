@@ -6,7 +6,9 @@ export const Content = styled.View`
 
 export const SettingsMenu = styled.View``;
 
-export const SettingsItemMenu = styled.View``;
+export const SettingsItemMenu = styled.View`
+  margin: 0 0 30px 0;
+`;
 
 export const Title = styled.Text`
   font-family: Comfortaa-Bold;
