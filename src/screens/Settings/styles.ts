@@ -7,7 +7,7 @@ export const Content = styled.View`
 export const SettingsMenu = styled.View``;
 
 export const SettingsItemMenu = styled.View`
-  margin: 10px 0;
+  
 `;
 
 export const Title = styled.Text`
