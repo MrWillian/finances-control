@@ -13,17 +13,17 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
       <Header navigation={navigation} />
 
       <Content>
-        <Text>Políticas de Privacidade</Text>
-        <Text>
-          Nós, da Mr. Code, estamos comprometidos em resguardar sua privacidade. O intuito deste documento é
+        <Text style={{fontFamily: 'Comfortaa-Bold', fontSize: 18, color: '#FDFDFD'}}>
+          Políticas de Privacidade
+        </Text>
+        <Text style={{fontFamily: 'Comfortaa-Regular', color: '#FDFDFD', marginTop: 20}}>
+          Nós, da <Text style={{fontFamily: 'Comfortaa-Bold'}}>Mr. Code</Text>, estamos comprometidos em resguardar 
+          sua privacidade. O intuito deste documento é
           esclarecer quais informações são coletadas dos usuários de nosso Aplicativo, o FinApp. 
-          A Mr. Code reconhece que a sua privacidade é muito importante, portanto, 
+          A <Text style={{fontFamily: 'Comfortaa-Bold'}}>Mr. Code</Text> reconhece que a sua privacidade é muito importante, portanto, 
           tomamos todas as medidas possíveis para protegê-la. Nesse sentido, a presente Política de Privacidade
           visa lhe informar como as suas informações e dados serão coletados, usados, compartilhados e armazenados
           por meio dos nossos siter e respectivos serviços.
-
-          
-
         </Text>
       </Content>
 
