@@ -13,17 +13,28 @@ const CustomDrawer: React.FC = () => {
   const navigation = useNavigation();
   let storageController = new StorageController();
 
-  const items = [
-    "Meus Objetivos", 
-    "Metas de despesas",
-    "Relatórios",
-    "Minhas conquistas",
-    "Preferências"
+  const items = [{
+      name: "Meus Objetivos", 
+      link: '',
+    },{
+      name: "Metas de despesas",
+      link: '',
+    },{
+      name: "Relatórios",
+      link: '',
+    },{
+      name: "Minhas conquistas", 
+      link: '',
+    },{
+      name: "Preferências",
+      link: '',
+    },{
+      name: "Políticas de Privacidade",
+      link: 'PrivacyPolicy',
+    }
   ];
 
-  // const redirect = (item) => {
-  //   console.log("Redirect...", item);
-  // }
+  const redirect = (link: string) => navigation.navigate(link);
 
   const logout = () => {
     storageController.removeItem('@finances/user');
@@ -36,8 +47,8 @@ const CustomDrawer: React.FC = () => {
         <ItemsContainer>
           {items.map((item, index) => {
             return (
-              <ItemButton key={index}>
-                <ItemLabel>{item}</ItemLabel>
+              <ItemButton key={index} onPress={() => redirect(item.link)}>
+                <ItemLabel>{item.name}</ItemLabel>
               </ItemButton>
             );
           })}

@@ -10,6 +10,7 @@ import NewAccount from '../../NewAccount';
 import ViewAccount from '../../ViewAccount';
 import NewTransaction from '../../NewTransaction';
 import BalanceStats from '../../BalanceStats';
+import PrivacyPolicy from '../../PrivacyPolicy';
 
 const AppStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -26,6 +27,7 @@ const MainStack: React.FC = () => {
       <AppStack.Screen name="NewTransaction" component={NewTransaction} />
       <AppStack.Screen name="ViewAccount" component={ViewAccount} />
       <AppStack.Screen name="BalanceStats" component={BalanceStats} />
+      <AppStack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
     </Drawer.Navigator>
   );
 }
