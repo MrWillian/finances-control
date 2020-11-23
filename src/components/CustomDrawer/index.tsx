@@ -18,7 +18,8 @@ const CustomDrawer: React.FC = () => {
     "Metas de despesas",
     "Relatórios",
     "Minhas conquistas",
-    "Preferências"
+    "Preferências",
+    "Políticas de Privacidade",
   ];
 
   // const redirect = (item) => {
