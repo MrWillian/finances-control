@@ -66,7 +66,7 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
         </Scroll>
       </Content>
 
-      <MenuBottom activePage={'PrivacyPolicy'} />
+      <MenuBottom activePage={'Settings'} />
     </BackgroundGradient>
   );
 }
