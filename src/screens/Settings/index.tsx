@@ -133,9 +133,9 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
           <SettingsItemMenu>
             <Title>Deletar Usuário</Title>
             <SettingsItem>
-              <SettingsItemLabel>Excluir conta</SettingsItemLabel>
+              <SettingsItemLabel>Excluir usuário</SettingsItemLabel>
               <SettingsItemValue onPress={() => navigation.navigate('DeleteUser')}>
-                <SettingsItemValueLabel>Ir para tela de exclusão</SettingsItemValueLabel>
+                <SettingsItemValueLabel>Ir para exclusão</SettingsItemValueLabel>
                 <Icon name="arrow-forward" size={15} color="#C8C8C8" />
               </SettingsItemValue>
             </SettingsItem>
