@@ -25,12 +25,17 @@ const CustomDrawer: React.FC = () => {
     },{
       name: "Minhas conquistas", 
       link: '',
-    },{
+    },
+    {
       name: "Preferências",
       link: '',
-    },{
+    },
+    {
       name: "Políticas de Privacidade",
       link: 'PrivacyPolicy',
+    },{
+      name: "Excluir conta",
+      link: 'DeleteUser',
     }
   ];
 
