@@ -45,7 +45,7 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
 
           <Paragraph />
           
-          <SubTitle>1. Coleta de dados</SubTitle>
+          <SubTitle>1 - Coleta de dados</SubTitle>
 
           <Paragraph>
             Nós coletamos algumas informações de identificação pessoal para o seu registro no aplicativo, essas 
@@ -63,6 +63,89 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
             delas, ou seja, é algo meramente ilustrativo para você utilizar o nosso serviço.
           </Paragraph>
 
+          <Paragraph />
+          
+          <SubTitle>2 - Uso do seus dados pessoais</SubTitle>
+
+          <Paragraph>
+            Todos os dados que coletamos são utilizados para a prestação de nossos serviços, e aqui, prezamos muito a 
+            sua privacidade. Por isso, todos os seus dados são dados como confidenciais, e só as utilizaremos para os
+            fins descritos aqui, e autorizados por você. Ademais, seus dados também podem ser utilizados para criarmos
+            novos serviços, produtos e funcionalidades. 
+          </Paragraph>
+
+          <Paragraph>
+            Para prestar nosso serviço de controle de finanças, nós utilizaremos os dados financeiros informados por 
+            você, dados como, suas contas e transações financeiras fornecidas, para assim, você ter armazenado analises
+            de ganhos e gastos.
+          </Paragraph>
+
+          <Paragraph>
+            Eventualmente, poderemos utilizar dados para finalidades não previstas nesta política de privacidade, mas 
+            estas estarão dentro das suas legítimas expectativas. O eventual uso dos seus dados para finalidades que 
+            não cumpram com essa prerrogativa será feito mediante sua autorização prévia.
+          </Paragraph>
+
+          <Paragraph>
+            Seu e-mail é utilizado para o registro de seu usuário, e também pode ser usado para envio de Newsletters 
+            relacionadas ao mundo das Finanças. Funcionários do FinApp poderão entrar em contato via e-mail ou telefone
+            para fazer pesquisas ou apresentar algum de nossos serviços.
+          </Paragraph>
+
+          <Paragraph />
+          
+          <SubTitle>3 - Acesso aos seus dados pessoais</SubTitle>
+          
+          <Paragraph>
+            Todos os seus dados são confidenciais e qualquer usos destes estará de acordo com a presente Política.
+            Manteremos os dados e informações somente até quando estas forem necessárias ou relevantes para as 
+            finalidades descritas nesta Política, ou em caso de períodos pré-determinados por lei.
+          </Paragraph>
+
+          <Paragraph>
+            Consideramos a sua privacidade algo muito importante e faremos tudo que estiver ao nosso alcance para
+            protegê-la. Todavia, não temos como garantir complemente que todos os dados e informações sobre você em
+            nossa plataforma estarão livres de acessos não autorizados, principalmente caso haja compartilhamento
+            indevido das credenciais necessárias para acessar a nossa plataforma. Portanto, você é o único responsável
+            por manter sua senha de acesso em local seguro e é vedado o compartilhamento desta com terceiros.
+          </Paragraph>
+
+          <Paragraph />
+          
+          <SubTitle>4 - Compartilhamento de dados</SubTitle>
+
+          <Paragraph>
+            Não compartilhamos de maneira alguma os seus dados informados.
+          </Paragraph>
+
+          <Paragraph />
+          
+          <SubTitle>5 - Alteração/exclusão de informações pessoais</SubTitle>
+
+          <Paragraph>
+            Todos os dados coletados serão excluídos de nossos servidores quando você assim requisitar.
+          </Paragraph>
+
+          <Paragraph />
+
+          <SubTitle>6 - Mudanças na Política de Privacidade</SubTitle>
+          
+          <Paragraph>
+            Essa Política de Privacidade pode passar por atualizações. Desta forma, recomendamos visitar periodicamente
+            esta página para que você tenha conhecimento sobre as modificações. Caso sejam feitas alterações relevantes
+            que ensejem novas autorizações suas, publicaremos uma nova política de privacidade.
+            Antes de usar informações para outros fins que não os definidos nesta Política de Privacidade, 
+            solicitaremos sua autorização.
+          </Paragraph>
+          
+          <Paragraph />
+
+          <SubTitle>7 - Lei Aplicável</SubTitle>
+
+          <Paragraph>
+            Este documento é regido e deve ser interpretado de acordo com as leis da República Federativa do Brasil.
+          </Paragraph>
+          
         </Scroll>
       </Content>
 
