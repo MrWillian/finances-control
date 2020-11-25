@@ -13,19 +13,21 @@ const CustomDrawer: React.FC = () => {
   const navigation = useNavigation();
   let storageController = new StorageController();
 
-  const items = [{
-      name: "Meus Objetivos", 
-      link: '',
-    },{
-      name: "Metas de despesas",
-      link: '',
-    },{
-      name: "Relatórios",
-      link: '',
-    },{
-      name: "Minhas conquistas", 
-      link: '',
-    },{
+  const items = [
+    // {
+    //   name: "Meus Objetivos", 
+    //   link: '',
+    // },{
+    //   name: "Metas de despesas",
+    //   link: '',
+    // },{
+    //   name: "Relatórios",
+    //   link: '',
+    // },{
+    //   name: "Minhas conquistas", 
+    //   link: '',
+    // },
+    {
       name: "Configurações",
       link: 'Settings',
     },{
