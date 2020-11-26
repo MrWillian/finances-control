@@ -12,9 +12,11 @@ import { Input as CustomInput } from '../Input';
 
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
+import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 import { createAccount, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
 import { validationSchema } from './validationSchema';
 import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
+import { StorageController } from '../../controllers';
 
 import { Container } from './styles';
 
@@ -27,19 +29,28 @@ interface FormValues {
 const SheetForm: React.FC = () => {
   const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [tokenStorage, setTokenStorage] = useState('');
   
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  let storageController = new StorageController();
 
   async function handleCreate(values: FormValues) {
     setIsLoading(true);
-    const account = {
-      name: values.name,
-      description: values.description,
-      amount: values.amount,
-    }
-    const response = dispatch(createAccount(account, token));
+    getTokenStorage();
+
+    console.log('token', token);
+    console.log('tokenStorage', tokenStorage);
+
+    const account: Account = { name: values.name, description: values.description, amount: values.amount };
+
+    const response = dispatch( createAccount(
+      account, 
+      token.length !== 0 ? token : tokenStorage) 
+    );
+
+    console.log('reponse', response);
     
     if (response.payload.data) {
       setFlashMessage(true);
@@ -55,6 +66,8 @@ const SheetForm: React.FC = () => {
       }, 3000);
     }
   }
+
+  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
 
   const renderForm = ({ 
     values, handleSubmit, setFieldValue, touched, errors, setFieldTouched, isSubmitting
