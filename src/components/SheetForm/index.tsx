@@ -7,7 +7,6 @@ import { Input } from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';
 import { showMessage } from "react-native-flash-message";
 
-import { FlashMessage } from '../FlashMessage';
 import { Button, Title } from '../FormBasicComponents/';
 import { Input as CustomInput } from '../Input';
 
@@ -21,14 +20,9 @@ import { StorageController } from '../../controllers';
 
 import { Container } from './styles';
 
-interface FormValues {
-  name: string;
-  description: string;
-  amount: string;
-}
+interface FormValues { name: string; description: string; amount: string; }
 
 const SheetForm: React.FC = () => {
-  const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [tokenStorage, setTokenStorage] = useState('');
   
@@ -40,16 +34,10 @@ const SheetForm: React.FC = () => {
   async function handleCreate(values: FormValues) {
     setIsLoading(true);
     getTokenStorage();
-
-    console.log('token', token);
-    console.log('tokenStorage', tokenStorage);
-
+    
     const account: Account = { name: values.name, description: values.description, amount: values.amount };
 
-    const response = dispatch( createAccount(
-      account, 
-      token.length !== 0 ? token : tokenStorage) 
-    );
+    const response = dispatch(createAccount(account, token.length !== 0 ? token : tokenStorage));
 
     console.log('reponse', response);
     
@@ -59,9 +47,7 @@ const SheetForm: React.FC = () => {
         description: "A conta foi criada com sucesso...",
         type: "success",
       });
-      // setFlashMessage(true);
       setTimeout(() => { 
-        // setFlashMessage(false); 
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
         navigation.navigate('Main');
@@ -132,8 +118,6 @@ const SheetForm: React.FC = () => {
         onSubmit={handleCreate} validationSchema={validationSchema}>
         {(formikBag: FormikProps<FormValues>) => renderForm(formikBag)}
       </Formik>
-      
-      {flashMessage ? <FlashMessage message={'Conta criada com sucesso...'} /> : null}
     </>
   );
 }
