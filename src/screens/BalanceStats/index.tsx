@@ -39,11 +39,7 @@ const BalanceStats: React.FC<iNavigationProps> = ({navigation}) => {
 
   useEffect(() => { 
     getTokenStorage();
-
-    if (token.length === 0) 
-      dispatch(loadRequest(tokenStorage));
-    else 
-      dispatch(loadRequest(token));
+    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
   }, []);
 
   const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
