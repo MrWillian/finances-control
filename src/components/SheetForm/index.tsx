@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Formik, FormikProps } from 'formik';
 import { Input } from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';
+import { showMessage } from "react-native-flash-message";
 
 import { FlashMessage } from '../FlashMessage';
 import { Button, Title } from '../FormBasicComponents/';
@@ -53,9 +54,14 @@ const SheetForm: React.FC = () => {
     console.log('reponse', response);
     
     if (response.payload.data) {
-      setFlashMessage(true);
+      showMessage({
+        message: "Conta criada!",
+        description: "A conta foi criada com sucesso...",
+        type: "success",
+      });
+      // setFlashMessage(true);
       setTimeout(() => { 
-        setFlashMessage(false); 
+        // setFlashMessage(false); 
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
         navigation.navigate('Main');
