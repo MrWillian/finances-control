@@ -31,7 +31,7 @@ const AccountsContainer: React.FC = () => {
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
     getTokenStorage();
     
-    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));    
+    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
   }, []);
   
   useEffect(() => { setTimeout(() => { setVisible(true) }, 2000); }, [accounts]);
