@@ -10,6 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { FlashMessage } from '../FlashMessage';
 import { Button, Title } from '../FormBasicComponents';
 import { Input as CustomInput } from '../Input';
+import { showMessage, hideMessage } from "react-native-flash-message";
 
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
@@ -75,9 +76,13 @@ const TransactionForm: React.FC = () => {
     const response = dispatch(createTransaction(transaction, token));
     
     if (response.payload.data) {
-      setFlashMessage(true);
+      showMessage({
+        message: "Transação cadastrada",
+        type: "success",
+      });
+      // setFlashMessage(true);
       setTimeout(() => { 
-        setFlashMessage(false); 
+        // setFlashMessage(false); 
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
         dispatch(loadRequestTransactions(token));
