@@ -43,7 +43,9 @@ const TransactionForm: React.FC = () => {
 
   const [tokenStorage, setTokenStorage] = useState('');
   const [selectedAccount, setSelectedAccount] = useState<React.ReactText>(accounts[0]?.name);
-  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(transactionCategories[1]?.name);
+  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(
+    transactionCategories[1]?.name !== 'Lucro' ? transactionCategories[1]?.name : transactionCategories[2]?.name
+  );
   const [type, setType] = useState<React.ReactText>('expense');
   const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
