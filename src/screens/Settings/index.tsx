@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
 import { Switch } from 'react-native';
 import { BottomSheet, ListItem } from 'react-native-elements';
@@ -126,6 +127,17 @@ const Settings: React.FC<iNavigationProps> = ({navigation}) => {
                 onValueChange={toggleAllowNotificationsSwitch}
                 value={allowNotifications}
               />
+            </SettingsItem>
+          </SettingsItemMenu>
+
+          <SettingsItemMenu>
+            <Title>Deletar Usuário</Title>
+            <SettingsItem>
+              <SettingsItemLabel>Excluir usuário</SettingsItemLabel>
+              <SettingsItemValue onPress={() => navigation.navigate('DeleteUser')}>
+                <SettingsItemValueLabel>Ir para exclusão</SettingsItemValueLabel>
+                <Icon name="arrow-forward" size={15} color="#C8C8C8" />
+              </SettingsItemValue>
             </SettingsItem>
           </SettingsItemMenu>
         </SettingsMenu>

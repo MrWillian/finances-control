@@ -23,6 +23,7 @@ import { TransactionCategory } from '../../../core/lib/adapters/redux/store/duck
 import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 
 import { Container, Scroll, InputContainer, Label } from './styles';
+import { StorageController } from '../../controllers';
 
 interface FormValues {
   description: string;
@@ -38,9 +39,13 @@ const TransactionForm: React.FC = () => {
   const transactionCategories = 
     useSelector<ApplicationState, TransactionCategory[]>(state => state.transactionCategories.data);
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+  let storageController = new StorageController();
 
+  const [tokenStorage, setTokenStorage] = useState('');
   const [selectedAccount, setSelectedAccount] = useState<React.ReactText>(accounts[0]?.name);
-  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(transactionCategories[1]?.name);
+  const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(
+    transactionCategories[1]?.name !== 'Lucro' ? transactionCategories[1]?.name : transactionCategories[2]?.name
+  );
   const [type, setType] = useState<React.ReactText>('expense');
   const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -49,9 +54,12 @@ const TransactionForm: React.FC = () => {
   const navigation = useNavigation();
 
   useEffect(() => { 
-    dispatch(loadRequest(token));
-    dispatch(loadRequestCategories(token));
+    getTokenStorage();
+    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
+    dispatch(loadRequestCategories(token.length > 0 ? token : tokenStorage));
   }, []);
+
+  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
 
   function handleCreate(values: FormValues) {
     const transaction: Transaction = {

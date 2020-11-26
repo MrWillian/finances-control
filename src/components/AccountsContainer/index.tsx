@@ -8,6 +8,7 @@ import { deleteAccount, loadRequest } from '../../../core/lib/adapters/redux/sto
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
+import { StorageController } from '../../controllers';
 
 import { FlashMessage } from '../FlashMessage';
 import AccountCard from '../AccountCard';
@@ -17,7 +18,9 @@ import { Container, Divisor } from './styles';
 const AccountsContainer: React.FC = () => {
   const accounts = useSelector<ApplicationState, Account[]>(state => state.accounts.data);
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+  let storageController = new StorageController();
 
+  const [tokenStorage, setTokenStorage] = useState('');
   const [visible, setVisible] = useState(false);
   const [flashMessage, setFlashMessage] = useState(false);
   const time = new Date().getTime();
@@ -26,11 +29,15 @@ const AccountsContainer: React.FC = () => {
 
   useEffect(() => { 
     LogBox.ignoreLogs(['VirtualizedLists should never be nested']);
-    dispatch(loadRequest(token));
+    getTokenStorage();
+    
+    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
   }, []);
-
+  
   useEffect(() => { setTimeout(() => { setVisible(true) }, 2000); }, [accounts]);
 
+  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
+  
   const keyExtractor = () => time.toString() + (Math.floor(Math.random() * Math.floor(time))).toString();
    
   const renderItem = ({item}: {item: Account}) => 

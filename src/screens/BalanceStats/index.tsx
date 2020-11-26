@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { Balance, loadRequest } from '../../../core/lib/adapters/redux/store/ducks/balance';
@@ -8,6 +8,7 @@ import BalanceCardGradient from '../../components/Gradients/BalanceCardGradient'
 import Header from '../../components/Header';
 import MenuBottom from '../../components/MenuBottom';
 import TransactionsForCategory from '../../components/TransactionsForCategory';
+import { StorageController } from '../../controllers';
 
 import { iNavigationProps } from '../../utils';
 
@@ -30,10 +31,18 @@ import {
 const BalanceStats: React.FC<iNavigationProps> = ({navigation}) => {
   const balance = useSelector<ApplicationState, Balance[]>(state => state.balance.data);
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+  let storageController = new StorageController();
+
+  const [tokenStorage, setTokenStorage] = useState('');
 
   const dispatch = useDispatch();
 
-  useEffect(() => { dispatch(loadRequest(token)); }, []);
+  useEffect(() => { 
+    getTokenStorage();
+    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
+  }, []);
+
+  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
 
   return (
     <BackgroundGradient>

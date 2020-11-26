@@ -17,4 +17,14 @@ export default class AuthController {
       return error;
     }
   }
+
+  async delete(token: string, id?: number) {
+    try {
+      const response = await api.delete('delete/users/'+id, { headers: { Authorization: `Bearer ${token}` } });
+      return response;
+    } catch(error) {
+      console.log('error', error);
+      return error;
+    }
+  }
 }

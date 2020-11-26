@@ -10,12 +10,16 @@ import TransactionCard from '../TransactionCard';
 import { Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/transactions';
+import { StorageController } from '../../controllers';
 
 import { Container, Scroll, HeaderContainer, Title } from './styles';
 
 const Transactions: React.FC = () => {
   const transactions = useSelector<ApplicationState, Transaction[]>(state => state.transactions.data);
   const token = useSelector<ApplicationState, string>(state => state.credentials.token);
+  let storageController = new StorageController();
+
+  const [tokenStorage, setTokenStorage] = useState('');
   const [visible, setVisible] = useState(false);
 
   const navigation = useNavigation();
@@ -23,9 +27,14 @@ const Transactions: React.FC = () => {
 
   const navigateToScreen = (screen: string) => navigation.navigate(screen);
 
-  useEffect(() => { dispatch(loadRequest(token)); }, []);
+  useEffect(() => { 
+    getTokenStorage();
+    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
+  }, []);
 
   useEffect(() => { setTimeout(() => { setVisible(true) }, 2000); }, [transactions]);
+  
+  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
 
   return (
     <Container>
