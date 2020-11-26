@@ -1,3 +1,4 @@
+import { showMessage } from 'react-native-flash-message';
 import { Action } from 'redux';
 import { call, put } from 'redux-saga/effects';
 import api from '../../../../../../../src/services/api';
@@ -31,6 +32,11 @@ export function* create(action: CreateAction) {
     });
     yield put(loadSuccess(response.data.data));
   } catch (error) {
+    showMessage({
+      message: "Erro!",
+      description: "Erro ao tentar criar uma conta",
+      type: "danger",
+    });
     console.log(error);
     yield put(loadFailure(error));
   }

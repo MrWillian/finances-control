@@ -7,10 +7,11 @@ import { Input } from "react-native-elements";
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { FlashMessage } from '../FlashMessage';
 import { Button, Title } from '../FormBasicComponents';
 import { Input as CustomInput } from '../Input';
+import { showMessage } from "react-native-flash-message";
 
+import { StorageController } from '../../controllers';
 import { FieldType } from '../../utils';
 import { ApplicationState } from '../../../core/lib/adapters/redux/store';
 import { loadRequest } from '../../../core/lib/adapters/redux/store/ducks/accounts/actions';
@@ -23,7 +24,6 @@ import { TransactionCategory } from '../../../core/lib/adapters/redux/store/duck
 import { createTransaction, Transaction } from '../../../core/lib/adapters/redux/store/ducks/transactions';
 
 import { Container, Scroll, InputContainer, Label } from './styles';
-import { StorageController } from '../../controllers';
 
 interface FormValues {
   description: string;
@@ -75,9 +75,11 @@ const TransactionForm: React.FC = () => {
     const response = dispatch(createTransaction(transaction, token));
     
     if (response.payload.data) {
-      setFlashMessage(true);
-      setTimeout(() => { 
-        setFlashMessage(false); 
+      showMessage({
+        message: "Transação cadastrada",
+        type: "success",
+      });
+      setTimeout(() => {
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
         dispatch(loadRequestTransactions(token));
@@ -191,7 +193,6 @@ const TransactionForm: React.FC = () => {
           <Text style={{ fontSize: 12, color: 'red', marginLeft: 15}}>{errors.value}</Text> : <Text></Text>}
 
         <Button name="Criar" isLoading={isLoading} onPress={handleSubmit} />
-        
       </Container>
     </Scroll>
   );
@@ -206,8 +207,6 @@ const TransactionForm: React.FC = () => {
         onSubmit={handleCreate} validationSchema={validationSchema}>
         {(formikBag: FormikProps<FormValues>) => renderForm(formikBag)}
       </Formik>
-      
-      {flashMessage ? <FlashMessage message={'Movimentação criada com sucesso...'} /> : null}
     </>
   );
 }
