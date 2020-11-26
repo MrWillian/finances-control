@@ -13,7 +13,7 @@ const reducer: Reducer<AccountsState> = (state = INITIAL_STATE, action) => {
     case AccountsTypes.LOAD_FAILURE:
       return { ...state, error: true, data: action.payload.data };
     case AccountsTypes.CREATE_ACCOUNT:
-      return { ...state, error: false, data: [ ...state.data, action.payload.data ]};
+      return { ...state, error: false, data: action.payload.data };
     case AccountsTypes.DELETE_ACCOUNT:
       return { ...state, error: false, accounts: state.data.filter((acc: Account) => acc.id !== action.payload.id) };
     default: 
