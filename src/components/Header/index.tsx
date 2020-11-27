@@ -19,9 +19,9 @@ const Header: React.FC<Props> = ({ navigation }) => {
       <TouchableOpacity onPress={openDrawer}>
         <Icon name="sort" size={22} color="#4F5A7D" />
       </TouchableOpacity>
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <Icon name="person" size={22} color="#4F5A7D" />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </Container>
   );
 }
