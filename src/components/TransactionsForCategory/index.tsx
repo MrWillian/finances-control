@@ -22,11 +22,6 @@ interface Props {
 
 const TransactionsForCategory: React.FC<Props> = ({ categories }) => {
 
-  const data = [
-    { name: "Comida", iconName: "fast-food", value: 130},
-    { name: "Entretenimento", iconName: "game-controller", value: 140},
-  ];
-
   const iconNameResolve = (name: string) => {
     switch(name) {
       case 'Comida':
