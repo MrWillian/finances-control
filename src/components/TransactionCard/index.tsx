@@ -1,6 +1,7 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { formatNumber } from '../../utils/format';
 
 import { Container, Title, Value } from './styles';
 
@@ -36,7 +37,8 @@ const TransactionCard: React.FC<Props> = ({ title, value, type }) => {
         }
         <Title>{title}</Title>
         <Value color={type === 'expense' ? 'red' : 'green'}>
-          {type === 'expense' ? ('-' + value) : ('+' + value)}
+          {type === 'expense' ? '- ' : '+ '}
+          {formatNumber(value)}
         </Value>
       </Container>
 
