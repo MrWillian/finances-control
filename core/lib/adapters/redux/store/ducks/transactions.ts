@@ -70,7 +70,7 @@ export function* create(action: CreateAction) {
     const response = yield call(api.post, 'transactions', action.payload.data, {
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
-    showMessage({ message: "Transação cadastrada", type: "success" });
+    showMessage({ message: "Movimentação cadastrada", type: "success" });
     yield put(loadSuccess(response.data.data));
   } catch (error) {
     console.log(error);
