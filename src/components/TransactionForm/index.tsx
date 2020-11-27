@@ -9,7 +9,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Button, Title } from '../FormBasicComponents';
 import { Input as CustomInput } from '../Input';
-import { showMessage } from "react-native-flash-message";
 
 import { StorageController } from '../../controllers';
 import { FieldType } from '../../utils';
