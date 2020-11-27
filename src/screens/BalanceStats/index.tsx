@@ -11,6 +11,7 @@ import TransactionsForCategory from '../../components/TransactionsForCategory';
 import { StorageController } from '../../controllers';
 
 import { iNavigationProps } from '../../utils';
+import { formatNumber } from '../../utils/format';
 
 import { 
   Content, 
@@ -43,14 +44,14 @@ const BalanceStats: React.FC<iNavigationProps> = ({navigation}) => {
   }, []);
 
   const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
-
+  
   return (
     <BackgroundGradient>
       <Header navigation={navigation} />
 
       <Content>
         <TotalContainer>
-          <TotalValue>R$ {balance.length > 0 ? balance[0].total : '0,00'}</TotalValue>
+          <TotalValue>{formatNumber(balance.length > 0 ? balance[0].total : 0)}</TotalValue>
           <TotalLabel>Balanço total</TotalLabel>
         </TotalContainer>
 
@@ -66,12 +67,12 @@ const BalanceStats: React.FC<iNavigationProps> = ({navigation}) => {
               <ValuesContainer>
                 <TypeContainer>
                   <TypeLabel>Ganhos</TypeLabel>
-                  <TypeValue>R$ {balance.length > 0 ? balance[0].totalProfit : '0,00'}</TypeValue>
+                  <TypeValue>{formatNumber(balance.length > 0 ? balance[0].totalProfit : 0)}</TypeValue>
                 </TypeContainer>
 
                 <TypeContainer>
                   <TypeLabel>Gastos</TypeLabel>
-                  <TypeValue>R$ {balance.length > 0 ? balance[0].totalExpense : '0,00'}</TypeValue>
+                  <TypeValue>{formatNumber(balance.length > 0 ? balance[0].totalExpense : 0)}</TypeValue>
                 </TypeContainer>
               </ValuesContainer>
 
