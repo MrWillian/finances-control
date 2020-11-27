@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/types';
 
 import { Container, DeleteContainer, Card, AccountInfo, Title, Value, See, SeeLabel } from './styles';
+import { formatNumber } from '../../utils/format';
 
 interface Props {
   account: Account;
@@ -69,7 +70,7 @@ const AccountCard: React.FC<Props> = ({ account, handleDelete }) => {
       <Card ref={cardRef} {...panResponder.panHandlers}>
         <AccountInfo>
           <Title>{account.name}</Title>
-          <Value>{account.amount}</Value>
+          <Value>{formatNumber(+account.amount)}</Value>
         </AccountInfo>
         <See onPress={handleSeeAccount}>
           <SeeLabel>Visualizar</SeeLabel>
