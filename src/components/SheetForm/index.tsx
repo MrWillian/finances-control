@@ -59,6 +59,7 @@ const SheetForm: React.FC = () => {
     <Container>
       <Title style={{marginLeft: 10}}>Crie uma conta...</Title>
       <Input 
+        focusable={true}
         containerStyle={[styles.container, { marginTop: 10 }]}
         inputContainerStyle={styles.inputContainer}
         inputStyle={styles.input}
