@@ -53,8 +53,9 @@ const TransactionForm: React.FC = () => {
 
   useEffect(() => {
     getTokenStorage();
-    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
-    dispatch(loadRequestCategories(token.length > 0 ? token : tokenStorage));
+    const validToken = token.length > 0 ? token : tokenStorage;
+    dispatch(loadRequest(validToken));
+    dispatch(loadRequestCategories(validToken));
   }, []);
 
   const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
