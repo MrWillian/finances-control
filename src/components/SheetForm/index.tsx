@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import { Formik, FormikProps } from 'formik';
 import { Input } from "react-native-elements";
 import Icon from 'react-native-vector-icons/Ionicons';
-import { showMessage } from "react-native-flash-message";
 
 import { Button, Title } from '../FormBasicComponents/';
 import { Input as CustomInput } from '../Input';
@@ -38,15 +37,8 @@ const SheetForm: React.FC = () => {
     const account: Account = { name: values.name, description: values.description, amount: values.amount };
 
     const response = dispatch(createAccount(account, token.length !== 0 ? token : tokenStorage));
-
-    console.log('reponse', response);
     
     if (response.payload.data) {
-      showMessage({
-        message: "Conta criada!",
-        description: "A conta foi criada com sucesso...",
-        type: "success",
-      });
       setTimeout(() => { 
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
