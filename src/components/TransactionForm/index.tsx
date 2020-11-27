@@ -75,10 +75,6 @@ const TransactionForm: React.FC = () => {
     const response = dispatch(createTransaction(transaction, token));
     
     if (response.payload.data) {
-      showMessage({
-        message: "Transação cadastrada",
-        type: "success",
-      });
       setTimeout(() => {
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));
