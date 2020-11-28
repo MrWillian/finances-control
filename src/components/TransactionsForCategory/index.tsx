@@ -15,17 +15,13 @@ import {
   CategoryName,
   CategoryValue,
 } from './styles';
+import { formatNumber } from '../../utils/format';
 
 interface Props {
   categories?: CategoryBalance[];
 }
 
 const TransactionsForCategory: React.FC<Props> = ({ categories }) => {
-
-  const data = [
-    { name: "Comida", iconName: "fast-food", value: 130},
-    { name: "Entretenimento", iconName: "game-controller", value: 140},
-  ];
 
   const iconNameResolve = (name: string) => {
     switch(name) {
@@ -59,7 +55,10 @@ const TransactionsForCategory: React.FC<Props> = ({ categories }) => {
               </CategoryGradient>
 
               <CategoryName>{category.name}</CategoryName>
-              <CategoryValue>{category.name === 'Lucro' ? '+' : '-'} R$ {category.total}</CategoryValue>
+              <CategoryValue>
+                {category.name === 'Lucro' ? '+ ' : '- '}
+                {formatNumber(category.total)}
+              </CategoryValue>
             </TransactionsForCategoryCard>  
           )
           : 

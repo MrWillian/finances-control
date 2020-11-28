@@ -2,6 +2,7 @@ import { action } from 'typesafe-actions';
 import { Action, Reducer } from 'redux';
 import { call, put } from 'redux-saga/effects';
 import api from '../../../../../../src/services/api';
+import { showMessage } from 'react-native-flash-message';
 
 export enum TransactionsTypes {
   LOAD_REQUEST = '@transactions/LOAD_REQUEST',
@@ -69,6 +70,7 @@ export function* create(action: CreateAction) {
     const response = yield call(api.post, 'transactions', action.payload.data, {
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
+    showMessage({ message: "Movimentação cadastrada", type: "success" });
     yield put(loadSuccess(response.data.data));
   } catch (error) {
     console.log(error);

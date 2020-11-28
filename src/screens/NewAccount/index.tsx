@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
 import { BackgroundGradient } from '../../components/Gradients';
@@ -7,9 +8,10 @@ import SheetForm from '../../components/SheetForm';
 import { Content } from './styles';
 
 const NewAccount: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <BackgroundGradient>
-      <Header />
+      <Header navigation={navigation} />
 
       <Content>
         <SheetForm />

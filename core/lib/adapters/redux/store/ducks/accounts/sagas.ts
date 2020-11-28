@@ -30,13 +30,10 @@ export function* create(action: CreateAction) {
     const response = yield call(api.post, 'accounts', action.payload.data, {
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
+    showMessage({ message: "Conta criada!", description: "A conta foi criada com sucesso...", type: "success" });
     yield put(loadSuccess(response.data.data));
   } catch (error) {
-    showMessage({
-      message: "Erro!",
-      description: "Erro ao tentar criar uma conta",
-      type: "danger",
-    });
+    showMessage({ message: "Erro!", description: "Erro ao tentar criar uma conta", type: "danger" });
     console.log(error);
     yield put(loadFailure(error));
   }

@@ -9,7 +9,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 
 import { Button, Title } from '../FormBasicComponents';
 import { Input as CustomInput } from '../Input';
-import { showMessage } from "react-native-flash-message";
 
 import { StorageController } from '../../controllers';
 import { FieldType } from '../../utils';
@@ -44,19 +43,19 @@ const TransactionForm: React.FC = () => {
   const [tokenStorage, setTokenStorage] = useState('');
   const [selectedAccount, setSelectedAccount] = useState<React.ReactText>(accounts[0]?.name);
   const [selectedCategory, setSelectedCategory] = useState<React.ReactText>(
-    transactionCategories[1]?.name !== 'Lucro' ? transactionCategories[1]?.name : transactionCategories[2]?.name
+    transactionCategories[1]?.name !== undefined ? transactionCategories[1]?.name : 'Acessório'
   );
   const [type, setType] = useState<React.ReactText>('expense');
-  const [flashMessage, setFlashMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  useEffect(() => { 
+  useEffect(() => {
     getTokenStorage();
-    dispatch(loadRequest(token.length > 0 ? token : tokenStorage));
-    dispatch(loadRequestCategories(token.length > 0 ? token : tokenStorage));
+    const validToken = token.length > 0 ? token : tokenStorage;
+    dispatch(loadRequest(validToken));
+    dispatch(loadRequestCategories(validToken));
   }, []);
 
   const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
@@ -75,10 +74,6 @@ const TransactionForm: React.FC = () => {
     const response = dispatch(createTransaction(transaction, token));
     
     if (response.payload.data) {
-      showMessage({
-        message: "Transação cadastrada",
-        type: "success",
-      });
       setTimeout(() => {
         dispatch(loadRequest(token));
         dispatch(loadBalance(token));

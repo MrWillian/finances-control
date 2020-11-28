@@ -7,6 +7,7 @@ import { BackgroundGradient } from '../../components/Gradients';
 import Header from '../../components/Header';
 
 import { Content, LabelContainer, Label, Font, BackButton, BackButtonLabel } from './styles';
+import { formatNumber } from '../../utils/format';
 
 interface Props {
   account: Account;
@@ -36,7 +37,7 @@ const ViewAccount: React.FC<Props> = (account) => {
         </LabelContainer>
         <LabelContainer>
           <Label>Valor Total na conta:</Label>
-          <Font>R$ {accountTemp.amount}</Font>
+          <Font>{formatNumber(+accountTemp.amount)}</Font>
         </LabelContainer>
 
         <BackButton onPress={() => navigation.goBack()}>
