@@ -48,6 +48,7 @@ export function* remove(action: DeleteAction) {
     showMessage({ message: "Conta deletada!", description: "A conta foi deletada com sucesso...", type: "success" });
     yield put(loadSuccess(response));
   } catch (error) {
+    showMessage({ message: "Erro!", description: "Aconteceu algo ao tentar deletar a conta...", type: "danger" });
     console.log(error);
     yield put(loadFailure(error));
   }
