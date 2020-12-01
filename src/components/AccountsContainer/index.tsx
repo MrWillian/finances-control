@@ -43,9 +43,10 @@ const AccountsContainer: React.FC = () => {
     <AccountCard key={item.id} account={item} handleDelete={handleDeleteAccount} />;
   
   const handleDeleteAccount = async (id: number) => {
-    dispatch(deleteAccount(id, token));
-    dispatch(loadRequest(token));
-    dispatch(loadBalance(token));
+    const validToken = token.length > 0 ? token : tokenStorage;
+    dispatch(deleteAccount(id, validToken));
+    dispatch(loadRequest(validToken));
+    dispatch(loadBalance(validToken));
     // if (response.error)
     // setAccounts.filter((account: Account) => account.id !== action.payload.id )
   }
