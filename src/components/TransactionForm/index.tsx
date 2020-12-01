@@ -69,9 +69,9 @@ const TransactionForm: React.FC = () => {
       type: type.toString(),
       value: +values.value,
     }
-
+    
     setIsLoading(true);
-    const response = dispatch(createTransaction(transaction, token));
+    const response = dispatch(createTransaction(transaction, token.length > 0 ? token : tokenStorage));
     
     if (response.payload.data) {
       setTimeout(() => {

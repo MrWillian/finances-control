@@ -10,7 +10,6 @@ import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/t
 import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 import { StorageController } from '../../controllers';
 
-import { FlashMessage } from '../FlashMessage';
 import AccountCard from '../AccountCard';
 
 import { Container, Divisor } from './styles';
@@ -22,7 +21,6 @@ const AccountsContainer: React.FC = () => {
 
   const [tokenStorage, setTokenStorage] = useState('');
   const [visible, setVisible] = useState(false);
-  const [flashMessage, setFlashMessage] = useState(false);
   const time = new Date().getTime();
 
   const dispatch = useDispatch();
@@ -36,7 +34,8 @@ const AccountsContainer: React.FC = () => {
   
   useEffect(() => { setTimeout(() => { setVisible(true) }, 2000); }, [accounts]);
 
-  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
+  const getTokenStorage: any = async () => 
+          setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
   
   const keyExtractor = () => time.toString() + (Math.floor(Math.random() * Math.floor(time))).toString();
    
@@ -44,13 +43,12 @@ const AccountsContainer: React.FC = () => {
     <AccountCard key={item.id} account={item} handleDelete={handleDeleteAccount} />;
   
   const handleDeleteAccount = async (id: number) => {
-    dispatch(deleteAccount(id, token));
-    dispatch(loadRequest(token));
-    dispatch(loadBalance(token));
+    const validToken = token.length > 0 ? token : tokenStorage;
+    dispatch(deleteAccount(id, validToken));
+    dispatch(loadRequest(validToken));
+    dispatch(loadBalance(validToken));
     // if (response.error)
     // setAccounts.filter((account: Account) => account.id !== action.payload.id )
-    setFlashMessage(true);
-    setTimeout(() => { setFlashMessage(false) }, 3000);
   }
 
   return (
@@ -66,9 +64,6 @@ const AccountsContainer: React.FC = () => {
         <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text>
       }
       </ShimmerPlaceHolder>
-
-      {flashMessage ? <FlashMessage message={'Conta deletada com sucesso...'} /> : null}
-
     </Container>
   );
 }

@@ -21,6 +21,7 @@ export function* load(action: LoadAction) {
     });
     yield put(loadSuccess(response.data.data.data));
   } catch(error) {
+    console.log('error load accounts', error);
     yield put(loadFailure({ name: "Error", message: error, stack: undefined }));
   }
 }
@@ -44,8 +45,10 @@ export function* remove(action: DeleteAction) {
     const response = yield call(api.delete, 'accounts/'+action.payload.id, { 
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
+    showMessage({ message: "Conta deletada!", description: "A conta foi deletada com sucesso...", type: "success" });
     yield put(loadSuccess(response));
   } catch (error) {
+    showMessage({ message: "Erro!", description: "Aconteceu algo ao tentar deletar a conta...", type: "danger" });
     console.log(error);
     yield put(loadFailure(error));
   }

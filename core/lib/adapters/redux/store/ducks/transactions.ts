@@ -73,7 +73,9 @@ export function* create(action: CreateAction) {
     showMessage({ message: "Movimentação cadastrada", type: "success" });
     yield put(loadSuccess(response.data.data));
   } catch (error) {
-    console.log(error);
+    showMessage({ 
+      message: "Erro!", description: "Erro ao tentar criar a movimentação, tente novamente!", type: "danger" 
+    });
     yield put(loadFailure(error));
   }
 }
