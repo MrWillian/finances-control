@@ -45,6 +45,7 @@ export function* remove(action: DeleteAction) {
     const response = yield call(api.delete, 'accounts/'+action.payload.id, { 
       headers: { Authorization: `Bearer ${action.payload.token}` }
     });
+    showMessage({ message: "Conta deletada!", description: "A conta foi deletada com sucesso...", type: "success" });
     yield put(loadSuccess(response));
   } catch (error) {
     console.log(error);
