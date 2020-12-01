@@ -36,7 +36,8 @@ const AccountsContainer: React.FC = () => {
   
   useEffect(() => { setTimeout(() => { setVisible(true) }, 2000); }, [accounts]);
 
-  const getTokenStorage: any = async () => setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
+  const getTokenStorage: any = async () => 
+          setTokenStorage((await storageController.getItem('@finances/user'))['access_token']);
   
   const keyExtractor = () => time.toString() + (Math.floor(Math.random() * Math.floor(time))).toString();
    
