@@ -21,6 +21,7 @@ export function* load(action: LoadAction) {
     });
     yield put(loadSuccess(response.data.data.data));
   } catch(error) {
+    console.log('error load accounts', error);
     yield put(loadFailure({ name: "Error", message: error, stack: undefined }));
   }
 }
