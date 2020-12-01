@@ -10,7 +10,6 @@ import { Account } from '../../../core/lib/adapters/redux/store/ducks/accounts/t
 import { loadRequest as loadBalance } from '../../../core/lib/adapters/redux/store/ducks/balance';
 import { StorageController } from '../../controllers';
 
-import { FlashMessage } from '../FlashMessage';
 import AccountCard from '../AccountCard';
 
 import { Container, Divisor } from './styles';
@@ -22,7 +21,6 @@ const AccountsContainer: React.FC = () => {
 
   const [tokenStorage, setTokenStorage] = useState('');
   const [visible, setVisible] = useState(false);
-  const [flashMessage, setFlashMessage] = useState(false);
   const time = new Date().getTime();
 
   const dispatch = useDispatch();
@@ -50,8 +48,6 @@ const AccountsContainer: React.FC = () => {
     dispatch(loadBalance(token));
     // if (response.error)
     // setAccounts.filter((account: Account) => account.id !== action.payload.id )
-    setFlashMessage(true);
-    setTimeout(() => { setFlashMessage(false) }, 3000);
   }
 
   return (
@@ -67,9 +63,6 @@ const AccountsContainer: React.FC = () => {
         <Text style={{fontFamily: 'Comfortaa-Medium', color: '#CCC'}}>Nenhuma conta criada ainda...</Text>
       }
       </ShimmerPlaceHolder>
-
-      {flashMessage ? <FlashMessage message={'Conta deletada com sucesso...'} /> : null}
-
     </Container>
   );
 }
