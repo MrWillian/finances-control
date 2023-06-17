@@ -1,4 +1,4 @@
 # finances-control
-Finances Control React Native Project
+Finances Control Project
 
 A better README is coming soon.
